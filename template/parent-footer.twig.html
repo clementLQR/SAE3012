@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+
+    <header>
+        {% block contenu %}
+        {% endblock %} 
+    </header>
+
+    <main>
+        {% block contenu %}
+        {% endblock %}
+    </main>
     
+    <footer>
+        <a href="#"><img src="" alt="acceuil"></a><a href="#"><img src="" alt="publier"></a><a href="profil"></a>
+    </footer>
 </body>
 </html>
