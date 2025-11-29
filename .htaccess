@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Send requests to root.php
+
+#######################################
+# Pour que les fichiers CSS, JS, et les images ne soient pas redirigés vers votre fichier routeur,
+RewriteCond %{REQUEST_URI} !.(css|gif|ico|jpg|js|png)$
+RewriteRule ^ routeur.php [L]
+
+
+
+
+
