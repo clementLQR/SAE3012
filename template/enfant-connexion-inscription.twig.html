@@ -1,0 +1,33 @@
+{% extends 'parent-footer.twig.html' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block header %}
+    <h1>Connexion / Inscription</h1>
+{% endblock %} 
+
+{% block contenu %}
+<div class="container-connexion-inscription">
+    <div class="connexion">
+        <h3>Connexion</h3>
+        <form method="post" action="/SAE3012/connexion-inscription/connexion">
+            <label for="identifiant">Identifiant :</label>
+            <input type="text" id="identifiant" name="identifiant" required>
+            <label for="mdp">Mot de passe :</label>
+            <input type="text" id="mdp" name="mdp"  required>
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+
+    <div class="inscription">
+        <h3>Inscription</h3>
+        <form method="post" action="/SAE3012/connexion-inscription/inscription">
+            <label for="nouvel_identifiant">Identifiant :</label>
+            <input type="text" id="nouvel_identifiant" name="nouvel_identifiant" required>
+            <label for="nouveau_mdp">Mot de passe :</label>
+            <input type="text" id="nouveau_mdp" name="nouveau_mdp" required>
+            <button type="submit">S'inscrire</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
