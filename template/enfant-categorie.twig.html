@@ -3,10 +3,28 @@
 
 
 {% block header %}
-
+ <h1>{{categorie.nom}}</h1>
 {% endblock %} 
 
 
 {% block contenu %}
+<p>Liste des messages de la categorie {{categorie.nom}}</p>
+{% for message in messages %}
+    <div>
+        <h2>{{ utilisateur.nom }}</h2>
+        <p>{{ message.date }}</p>
+        <img src="{{ message.imageSrc }}" alt="Message Image de {{ utilisateur.nom }}"> 
+        <p>{{ message.texte }}</p>
+        <div>
+            <button type="button">commenter</button>
+                
+            <button type="button">like</button>
+            <p>{{ message.nbrLike }}</p>
+            <button type="button">dislike</button>
+            <p>{{ message.nbrDislike }}</p>
+
+        </div>
+    </div>
+{% endfor %}
 
 {% endblock %}

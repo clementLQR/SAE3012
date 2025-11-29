@@ -3,10 +3,10 @@
 
     function get_all_utilisateur(){
         global $mysqli;
-        $query = "Select * from utilisateur";
+        $query = "SELECT * from utilisateur";
         $result = mysqli_query($mysqli, $query);
-        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        return $users;
+        $utilisateur = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $utilisateur;
     }
 
     function insert_utilisateur($identifiant, $mdp) {
@@ -40,12 +40,41 @@
 
     }
 
+    function get_all_categorie(){
+        global $mysqli;
+        $query = "Select * from categorie";
+        $result = mysqli_query($mysqli, $query);
+        $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $categories;
+    }
 
-    // function get_all_categorie(){
-    //     global $mysqli;
-    //     $query = "Select * from categorie";
-    //     $result = mysqli_query($mysqli, $query);
-    //     $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    //     return $categories;
-    // }
+    function get_categorie($idCat) {
+        global $mysqli;
+        $result = mysqli_query($mysqli, "SELECT * FROM categorie WHERE idCat = $idCat");
+        return mysqli_fetch_assoc($result);
+    }
+
+    function get_messages_par_categorie($idCat){
+        global $mysqli;
+        $query = "SELECT * FROM message WHERE idCAT = $idCat";
+        $result = mysqli_query($mysqli, $query);
+        $messages = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $messages;
+    }
+
+    function get_all_commentaire(){
+        global $mysqli;
+        $query = "SELECT * from commentaire";
+        $result = mysqli_query($mysqli, $query);
+        $commentaire = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $commentaire;
+    }
+
+    function get_all_reaction(){
+        global $mysqli;
+        $query = "SELECT * FROM reaction";
+        $result = mysqli_query($mysqli, $query);
+        $reaction = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $reaction;
+    }
 ?>

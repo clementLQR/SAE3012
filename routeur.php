@@ -32,6 +32,19 @@
         }
         afficher_page_connexion_inscription();
     }
+
+    else if ($section == 'categorie'){
+        if ($action == null){
+            afficher_page_accueil();
+        }
+        else {
+            afficher_page_categorie($action);
+        }
+    }
+
+    else if ($section == null || $section == 'accueil'){
+        afficher_page_accueil();
+    }
     
 
 ?>
