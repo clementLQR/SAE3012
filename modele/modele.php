@@ -11,14 +11,14 @@
 
     function insert_utilisateur($identifiant, $mdp) {
         global $mysqli;
-        $query = "INSERT INTO utilisateur (identifiant , mdp) VALUES ('$identifiant','$mdp')";
-        $identifiantExiste = get_all_utilisateur();
-        foreach($identifiantExiste as $utilisateur){
-            print_r($utilisateur);
-            if($utilisateur[1] === $identifiant){
-                return false; // L'utilisateur existe déjà
-            }
+        // Vérifier si identifiant existe
+        $queryCheck = "SELECT idUser FROM utilisateur WHERE identifiant = '$identifiant' LIMIT 1";
+        $resultCheck = mysqli_query($mysqli, $queryCheck);
+        if (mysqli_fetch_assoc($resultCheck)) {
+            return false; // L'identifiant existe déjà
         }
+        // Insertion
+        $query = "INSERT INTO utilisateur (identifiant, mdp) VALUES ('$identifiant', '$mdp')";
         $result = mysqli_query($mysqli, $query);
         
         if ($result) {

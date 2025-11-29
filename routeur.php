@@ -9,21 +9,21 @@
 
 
     $section = $pathExplode[1] ?? null;  
-    $action  = $pathExplode[3] ?? null; 
+    $action  = $pathExplode[2] ?? null; 
 
     print_r($pathExplode);
     // echo '<br>'.$section.'<br>';
     // echo '<br>'.$action.'<br>';
 
 
-    if ($section === 'connexion-inscription'){
+    if ($section == 'connexion-inscription'){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($action === 'inscription'){
+            if ($action == 'inscription'){
                 $identifiant = $_POST['nouvel_identifiant'];
                 $mdp = $_POST['nouveau_mdp'];
                 inscription_utilisateur($identifiant, $mdp);
             }
-            else if ($action === 'connexion'){
+            else if ($action == 'connexion'){
                 $identifiant = $_POST['identifiant'];
                 $mdp = $_POST['mdp'];
 
