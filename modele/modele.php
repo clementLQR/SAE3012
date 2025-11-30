@@ -3,11 +3,13 @@
 
     function get_all_utilisateur(){
         global $mysqli;
-        $query = "SELECT * from utilisateur";
+        $query = "SELECT * FROM utilisateur";
         $result = mysqli_query($mysqli, $query);
         $utilisateur = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $utilisateur;
     }
+
+    /* connexion - inscription */
 
     function insert_utilisateur($identifiant, $mdp) {
         global $mysqli;
@@ -40,9 +42,11 @@
 
     }
 
+    /* acceuil + categorie */
+
     function get_all_categorie(){
         global $mysqli;
-        $query = "Select * from categorie";
+        $query = "SELECT * FROM categorie";
         $result = mysqli_query($mysqli, $query);
         $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $categories;
@@ -77,4 +81,22 @@
         $reaction = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $reaction;
     }
+
+    /* publier */
+
+    function insert_message($imageSrc, $idCat, $idUser, $texte){
+        global $mysqli;
+        $query = "INSERT INTO message(date, texte, imageSrc, nbrLike, nbrDislike, IdCat, IdUser) VALUES (NOW(), '$texte', '$imageSrc', 0, 0, $idCat, $idUser)";
+        $result = mysqli_query($mysqli, $query);
+        
+        if ($result) {
+            return true; // succès
+        } else {
+            return false; // échec
+        }
+    }
+
+
 ?>
+
+

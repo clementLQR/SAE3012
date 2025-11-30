@@ -41,6 +41,27 @@
         ]);
     }
 
+    function afficher_page_publier(){
+        global $twig;
+        echo $twig -> render('enfant-publier.twig.html',
+         ['categories'=> get_all_categorie(),
+         "utilisateurs"=> get_all_utilisateur()]);
+    }
+
+    function ajouter_message($imageSrc, $idCat, $idUser, $texte){
+        $success = insert_message($imageSrc, $idCat, $idUser, $texte);
+        if ($success) {
+            return afficher_page_profil();
+        } else {
+            echo "Erreur lors de l'insertion";
+        }
+    }
+
+    function afficher_page_profil(){
+        global $twig;
+        echo $twig -> render('enfant-profil.twig.html');
+    }
+
 
 
 

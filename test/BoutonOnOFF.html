@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Interrupteur On/Off (accessible)</title>
+<style>
+  .switch {
+    --w: 56px;
+    --h: 30px;
+    display: inline-grid;
+    align-items: center;
+    gap: 12px;
+    font-family: sans-serif;
+  }
+
+  .switch input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .track {
+    width: var(--w);
+    height: var(--h);
+    background: #ddd;
+    border-radius: 999px;
+    position: relative;
+    transition: background .18s;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.05);
+  }
+
+  .thumb {
+    width: calc(var(--h) - 6px);
+    height: calc(var(--h) - 6px);
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    transition: transform .18s;
+    box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  }
+
+  input:checked + .track {
+    background: #2ea44f;
+  }
+  input:checked + .track .thumb {
+    transform: translateX(calc(var(--w) - var(--h)));
+  }
+
+  /* focus visible */
+  input:focus-visible + .track {
+    outline: 3px solid rgba(34, 150, 243, .25);
+    outline-offset: 3px;
+  }
+
+  .labelText { font-size: 14px; }
+</style>
+</head>
+<body>
+  <label class="switch">
+    <input id="visualToggle" type="checkbox" aria-label="Activer le mode" />
+    <span class="track" role="presentation">
+      <span class="thumb" aria-hidden="true"></span>
+    </span>
+    <span class="labelText" id="statusText">OFF</span>
+  </label>
+
+  <script>
+    const cb = document.getElementById('visualToggle');
+    const status = document.getElementById('statusText');
+
+    function updateStatus() {
+      status.textContent = cb.checked ? 'ON' : 'OFF';
+      // Ex : appeler une API, modifier l'UI, etc.
+      // fetch('/api/toggle', {method:'POST', body: JSON.stringify({on: cb.checked})})
+    }
+
+    cb.addEventListener('change', updateStatus);
+    // initial
+    updateStatus();
+  </script>
+</body>
+</html>

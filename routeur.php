@@ -37,10 +37,29 @@
         if ($action == null){
             afficher_page_accueil();
         }
-        else {
+        else if ($action == 'commenter'){
+            //
+        }
+        else if (is_numeric($action)){
             afficher_page_categorie($action);
         }
     }
+
+    else if ($section == 'publier'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $imageSrc = $_POST['imageSrc'];
+            $idCat = $_POST['idCat'];
+            $idUser = $_POST['idUser'];
+            $texte = $_POST['texte'];
+            ajouter_message($imageSrc, $idCat, $idUser, $texte);
+        }
+        afficher_page_publier();
+    }
+
+    else if ($section == 'profil'){
+        afficher_page_profil();
+    }
+
 
     else if ($section == null || $section == 'accueil'){
         afficher_page_accueil();

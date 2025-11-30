@@ -11,9 +11,9 @@
 <p>Liste des messages de la categorie {{categorie.nom}}</p>
 {% for message in messages %}
     <div>
-        <h2>{{ utilisateur.nom }}</h2>
+        <h2>{{ utilisateur.identifiant }}</h2> <!-- {{ utilisateur.identifiant }} ne fonctione pas -->
         <p>{{ message.date }}</p>
-        <img src="{{ message.imageSrc }}" alt="Message Image de {{ utilisateur.nom }}"> 
+        <img src="{{ message.imageSrc }}" alt="Message Image de {{ utilisateur.identifiant }}"> <!-- {{ utilisateur.identifiant }} ne fonctione pas -->
         <p>{{ message.texte }}</p>
         <div>
             <button type="button">commenter</button>
