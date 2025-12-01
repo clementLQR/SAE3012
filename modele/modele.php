@@ -58,13 +58,13 @@
         return mysqli_fetch_assoc($result);
     }
 
-    function get_messages_par_categorie($idCat){
-        global $mysqli;
-        $query = "SELECT * FROM message WHERE idCAT = $idCat";
-        $result = mysqli_query($mysqli, $query);
-        $messages = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        return $messages;
-    }
+    // function get_messages_par_categorie($idCat){
+    //     global $mysqli;
+    //     $query = "SELECT * FROM message WHERE idCAT = $idCat";
+    //     $result = mysqli_query($mysqli, $query);
+    //     $messages = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    //     return $messages;
+    // }
 
     function get_all_commentaire(){
         global $mysqli;
@@ -82,11 +82,34 @@
         return $reaction;
     }
 
+    function get_messages_par_categorie($idCat){
+        global $mysqli;
+
+        // Correction : on n'utilise plus "m.*" puisque l'alias n'existe pas
+        $query = "
+            SELECT message.*, utilisateur.identifiant AS auteur
+            FROM message
+            JOIN utilisateur ON message.IdUser = utilisateur.IdUser
+            WHERE message.IdCat = $idCat
+            ORDER BY message.date DESC
+        ";
+
+        $result = mysqli_query($mysqli, $query);
+
+        if (!$result) {
+            die("Erreur SQL : " . mysqli_error($mysqli));
+        }
+
+        $messages = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $messages;
+    }
+
+
     /* publier */
 
     function insert_message($imageSrc, $idCat, $idUser, $texte){
         global $mysqli;
-        $query = "INSERT INTO message(date, texte, imageSrc, nbrLike, nbrDislike, IdCat, IdUser) VALUES (NOW(), '$texte', '$imageSrc', 0, 0, $idCat, $idUser)";
+        $query = "INSERT INTO message(date, texte, imageSrc, nbrLike, nbrDislike, nbrCom, IdCat, IdUser) VALUES (NOW(), '$texte', '$imageSrc', 0, 0, 0, $idCat, $idUser)";
         $result = mysqli_query($mysqli, $query);
         
         if ($result) {
@@ -95,6 +118,8 @@
             return false; // échec
         }
     }
+
+
 
 
 ?>
