@@ -58,14 +58,6 @@
         return mysqli_fetch_assoc($result);
     }
 
-    // function get_messages_par_categorie($idCat){
-    //     global $mysqli;
-    //     $query = "SELECT * FROM message WHERE idCAT = $idCat";
-    //     $result = mysqli_query($mysqli, $query);
-    //     $messages = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    //     return $messages;
-    // }
-
     function get_all_commentaire(){
         global $mysqli;
         $query = "SELECT * from commentaire";
@@ -85,7 +77,6 @@
     function get_messages_par_categorie($idCat){
         global $mysqli;
 
-        // Correction : on n'utilise plus "m.*" puisque l'alias n'existe pas
         $query = "
             SELECT message.*, utilisateur.identifiant AS auteur
             FROM message
