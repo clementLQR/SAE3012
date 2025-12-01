@@ -33,6 +33,7 @@
     
     function afficher_page_categorie($idCat){
         global $twig;
+        print_r(get_all_utilisateur());
         echo $twig -> render('enfant-categorie.twig.html', ['categorie' => get_categorie($idCat),
         "messages" => get_messages_par_categorie($idCat),
         "utilisateur" => get_all_utilisateur(),
@@ -61,8 +62,4 @@
         global $twig;
         echo $twig -> render('enfant-profil.twig.html');
     }
-
-
-
-
 ?>

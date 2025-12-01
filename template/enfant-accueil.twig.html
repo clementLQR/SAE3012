@@ -10,7 +10,7 @@
 {% block contenu %}
     <p>categories</p>
     {% for categorie in categories %}
-         <a href="categorie/{{ categorie.idCat }}"> <!--url à corriger, ne fonctionne pas correctement -->
+        <a href="categorie/{{ categorie.IdCat }}"> 
             <button type="button">
                 <h2>{{ categorie.nom }}</h2>
                 <img src="{{ categorie.image }}" alt="{{ categorie.nom }}">
