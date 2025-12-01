@@ -15,12 +15,12 @@
     <select name="idCat" id="idCat">
         <option value="">Choisir une catégorie</option>
         {% for categorie in categories %}
-            <option value="{{ categorie.idCat }}">{{ categorie.nom }}</option>
+            <option value="{{ categorie.IdCat }}">{{ categorie.nom }}</option>
         {% endfor %}
     </select>
     <label for="texte">Texte</label>
     <textarea id="texte" name="texte" ></textarea>
-    <input type="hidden" name="idUser" value="1"> <!-- mettre en valeur {{utilisateur.idUser}} une fois qu'on a fait la fonctio qui permet de vérifier qu'un user est connecté -->
+    <input type="hidden" name="idUser" value="1"> <!-- mettre en valeur {{utilisateur.IdUser}} une fois qu'on a fait la fonction qui permet de vérifier qu'un user est connecté -->
     <button type="submit">Publier</button> 
 </from>
 {% endblock %}

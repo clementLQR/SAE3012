@@ -43,6 +43,9 @@
         else if (is_numeric($action)){
             afficher_page_categorie($action);
         }
+        else{
+            afficher_page_erreur();
+        }
     }
 
     else if ($section == 'publier'){
@@ -65,5 +68,8 @@
         afficher_page_accueil();
     }
     
+    else{
+        afficher_page_erreur();
+    }
 
 ?>

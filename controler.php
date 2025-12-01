@@ -62,4 +62,9 @@
         global $twig;
         echo $twig -> render('enfant-profil.twig.html');
     }
+
+    function afficher_page_erreur(){
+        global $twig;
+        echo $twig -> render('enfant-erreur.twig.html');
+    }
 ?>
