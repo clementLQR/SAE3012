@@ -63,22 +63,6 @@
         return mysqli_fetch_assoc($result);
     }
 
-    function get_all_commentaire(){
-        global $mysqli;
-        $query = "SELECT * from commentaire";
-        $result = mysqli_query($mysqli, $query);
-        $commentaire = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        return $commentaire;
-    }
-
-    function get_all_reaction(){
-        global $mysqli;
-        $query = "SELECT * FROM reaction";
-        $result = mysqli_query($mysqli, $query);
-        $reaction = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        return $reaction;
-    }
-
     function get_messages_par_categorie($idCat){
         global $mysqli;
 
@@ -182,6 +166,28 @@
             return true;
         }
         return false;
+    }
+
+    // réaction
+
+    function ajouter_Like_Dislike(){
+        //
+    }
+
+    function get_all_commentaire(){
+        global $mysqli;
+        $query = "SELECT * from commentaire";
+        $result = mysqli_query($mysqli, $query);
+        $commentaire = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $commentaire;
+    }
+
+    function get_all_reaction(){
+        global $mysqli;
+        $query = "SELECT * FROM reaction";
+        $result = mysqli_query($mysqli, $query);
+        $reaction = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $reaction;
     }
 ?>
 
