@@ -104,46 +104,49 @@
     /* publier */
 
     function insert_message_avec_image($idCat, $idUser, $texte) {
-        global $mysqli;
+    global $mysqli;
 
-        // Vérifier que le dossier existe
-        $upload_dir = "images_upload";
-        if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0777, true);
-        }
+    // Dossier des uploads
+    $upload_dir = "images-upload/";
 
-        // Gestion de l'image
-        $imageSrc = "";
+    // Création du dossier si absent
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
+    }
 
-        if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+    $imageSrc = "";
 
-            $imageName = time() . "_" . basename($_FILES['image']['name']);
-            $imagePath = $upload_dir . $imageName;
+    // Si une image est envoyée
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
 
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
-                $imageSrc = $imagePath;  // chemin sauvegardé en BDD
-            } 
-        }
+        // Nettoyage du nom du fichier
+        $originalName = basename($_FILES['image']['name']);
+        $originalName = str_replace(" ", "-", $originalName); // remplace les espaces
+        $originalName = strtolower($originalName);
 
-        // Insertion SQL
-        $query = "
-            INSERT INTO message (date, texte, imageSrc, nbrLike, nbrDislike, nbrCom, IdCat, IdUser)
-            VALUES (NOW(), '$texte', '$imageSrc', 0, 0, 0, $idCat, $idUser)
-        ";
+        // Création du nom final
+        $timestamp = time();
+        $newName = "$timestamp-$originalName";
 
-        $result = mysqli_query($mysqli, $query);
+        // Chemin complet pour sauvegarde
+        $imagePath = $upload_dir . $newName;
 
-        if ($result) {
-            return true;
-        } else {
-            return false;
+        // Upload du fichier
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
+            $imageSrc = $imagePath; // ce qui sera enregistré en BDD
         }
     }
 
-    /* paramètre */
+    // Insertion SQL
+    $query = "
+        INSERT INTO message (date, texte, imageSrc, nbrLike, nbrDislike, nbrCom, IdCat, IdUser)
+        VALUES (NOW(), '$texte', '$imageSrc', 0, 0, 0, $idCat, $idUser)
+    ";
 
+    $result = mysqli_query($mysqli, $query);
 
-
+    return $result ? true : false;
+}
 ?>
 
 
