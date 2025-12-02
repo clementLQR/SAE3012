@@ -57,9 +57,10 @@
         insert_message_avec_image($idCat, $idUser, $texte);
     }
 
-    function afficher_page_profil(){
+    function afficher_page_profil($utilisateur){
         global $twig;
-        echo $twig -> render('enfant-profil.twig.html');
+        echo $twig -> render('enfant-profil.twig.html',
+        ["utilisateur"=> $utilisateur]);
     }
 
     function afficher_page_parametre(){
@@ -72,8 +73,36 @@
         echo $twig -> render('enfant-biographie.twig.html');
     }
 
+    function update_bio($idUser, $biographie, $utilisateur){
+        $success = update_biographie($idUser, $biographie);
+        if ($success) {
+            header('Location: http://localhost/SAE3012/profil' );
+            reload_session_user($idUser);
+            return afficher_page_profil($utilisateur);
+        } else {
+            echo "Erreur lors de la modification";
+        }
+    }
+
+    function update_pseudo($idUser, $identifiant, $utilisateur){
+        $success = update_identifiant($idUser, $identifiant);
+        if ($success) {
+            header('Location: http://localhost/SAE3012/profil' );
+            reload_session_user($idUser);
+            return afficher_page_profil($utilisateur);
+        } else {
+            echo "Erreur lors de la modification";
+        }
+    }
+
+    function afficher_page_modifier_identifiant(){
+        global $twig;
+        echo $twig -> render('enfant-identifiant.twig.html');
+    }
+
     function afficher_page_deconnexion(){
         global $twig;
+        header('Location: http://localhost/SAE3012' );
         echo $twig -> render('enfant-connexion-inscription.twig.html');
     }
 

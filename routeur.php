@@ -30,30 +30,31 @@
             if ($action == 'inscription'){
                 $identifiant = $_POST['nouvel_identifiant'];
                 $mdp = $_POST['nouveau_mdp'];
-                inscription_utilisateur($identifiant, $mdp);
-                $path = [];
+                return inscription_utilisateur($identifiant, $mdp);
             }
             else if ($action == 'connexion'){
                 $identifiant = $_POST['identifiant'];
                 $mdp = $_POST['mdp'];
-                connexion_utilisateur($identifiant, $mdp);
+                return connexion_utilisateur($identifiant, $mdp);
             }             
         }
+
         afficher_page_connexion_inscription();
+        
     }
 
     else if ($section == 'categorie'){
         if ($action == null){
-            afficher_page_accueil();
+            return afficher_page_accueil();
         }
         else if ($action == 'commenter'){
             //
         }
         else if (is_numeric($action)){
-            afficher_page_categorie($action);
+            return afficher_page_categorie($action);
         }
         else{
-            afficher_page_erreur();
+            return afficher_page_erreur();
         }
     }
 
@@ -62,27 +63,46 @@
             $idCat = $_POST['idCat'];
             $idUser = $_SESSION['utilisateur']['IdUser'];
             $texte = $_POST['texte'];
-            publier_message($idCat, $idUser, $texte);
+            return publier_message($idCat, $idUser, $texte);
         }
         $utilisateur = $_SESSION['utilisateur'];
         afficher_page_publier($utilisateur);
     }
 
     else if ($section == 'profil'){
-        afficher_page_profil();
+        $utilisateur = $_SESSION['utilisateur'];
+        afficher_page_profil($utilisateur);
     }
 
-    else if ($section == 'parametre'){
+    else if ($section == 'parametre'){        
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             if ($action == 'deconnexion'){
                 session_destroy();
-                afficher_page_deconnexion();
-            }
-            else if ($action == 'biographie'){
-                afficher_page_modifier_biographie();
+                return afficher_page_deconnexion();
             }
         }
-        afficher_page_parametre();
+        if ($action == 'biographie'){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $idUser = $_SESSION['utilisateur']['IdUser'];
+                $biographie = $_POST['biographie'];
+                $utilisateur = $_SESSION['utilisateur'];
+                return update_bio($idUser, $biographie, $utilisateur);
+            }
+            return afficher_page_modifier_biographie();
+        }
+        if ($action == 'identifiant'){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $idUser = $_SESSION['utilisateur']['IdUser'];
+                $identifiant = $_POST['identifiant'];
+                $utilisateur = $_SESSION['utilisateur'];
+                update_pseudo($idUser, $identifiant, $utilisateur);
+            }
+            return afficher_page_modifier_identifiant();
+        }
+        else{
+            afficher_page_parametre();
+        }
+        
     }
 
 
