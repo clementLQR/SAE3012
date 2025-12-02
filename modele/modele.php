@@ -30,17 +30,47 @@
         }
     }
 
-    function connecte_utilisateur($identifiant, $mdp){
+    // function connecte_utilisateur($identifiant, $mdp){
+    //     global $mysqli;
+    //     $query = "SELECT * FROM utilisateur WHERE identifiant = '$identifiant' AND mdp = '$mdp'";
+    //     $result = mysqli_query($mysqli, $query);
+        
+    //     if ($result){
+    //         return true; // connexion réussie
+    //     } else {
+    //         return false; // échec de la connexion
+    //     }
+
+    // }
+
+    function connecte_utilisateur($identifiant, $mdp) {
         global $mysqli;
-        $query = "SELECT * FROM utilisateur WHERE identifiant = '$identifiant' AND mdp = '$mdp'";
+        // Requête pour chercher l'utilisateur
+        $query = "SELECT * FROM utilisateur WHERE identifiant = '$identifiant' LIMIT 1";
         $result = mysqli_query($mysqli, $query);
-        if ($result){
-            return true; // connexion réussie
-        } else {
-            return false; // échec de la connexion
+
+        if (!$result) {
+            die("Erreur SQL : " . mysqli_error($mysqli));
         }
 
+        $user = mysqli_fetch_assoc($result);
+
+        // Utilisateur introuvable
+        if (!$user) {
+            return false;
+        }
+
+        // Vérification du mot de passe (en clair dans ta BDD)
+        if ($user['mdp'] !== $mdp) {
+            return false;
+        }
+
+        // Connexion : on enregistre dans la session
+        $_SESSION['user'] = $user;
+
+        return true;
     }
+
 
     /* acceuil + categorie */
 
@@ -110,6 +140,11 @@
         }
     }
 
+    /* paramètre */
+
+    // function deconexion_utilisateur(){
+        
+    // }
 
 
 

@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require 'controler.php';
     require 'vendor/autoload.php';
 
@@ -11,12 +12,20 @@
     $section = $pathExplode[1] ?? null;  
     $action  = $pathExplode[2] ?? null; 
 
+    echo '<br>';
     print_r($pathExplode);
+    echo '<br>';
+    print_r($_SESSION);
+    echo '<br>';
     // echo '<br>'.$section.'<br>';
     // echo '<br>'.$action.'<br>';
 
+    if ($_SESSION == null && $section != 'connexion-inscription'){
+        afficher_page_connexion_inscription();
+    }
 
-    if ($section == 'connexion-inscription'){
+
+    else if ($section == 'connexion-inscription'){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($action == 'inscription'){
                 $identifiant = $_POST['nouvel_identifiant'];
@@ -26,7 +35,6 @@
             else if ($action == 'connexion'){
                 $identifiant = $_POST['identifiant'];
                 $mdp = $_POST['mdp'];
-
                 connexion_utilisateur($identifiant, $mdp);
             }             
         }
