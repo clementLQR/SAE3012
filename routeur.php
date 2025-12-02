@@ -31,6 +31,7 @@
                 $identifiant = $_POST['nouvel_identifiant'];
                 $mdp = $_POST['nouveau_mdp'];
                 inscription_utilisateur($identifiant, $mdp);
+                $path = [];
             }
             else if ($action == 'connexion'){
                 $identifiant = $_POST['identifiant'];
@@ -58,17 +59,26 @@
 
     else if ($section == 'publier'){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $imageSrc = $_POST['imageSrc'];
             $idCat = $_POST['idCat'];
             $idUser = $_POST['idUser'];
             $texte = $_POST['texte'];
-            ajouter_message($imageSrc, $idCat, $idUser, $texte);
+            publier_message($idCat, $idUser, $texte);
         }
         afficher_page_publier();
     }
 
     else if ($section == 'profil'){
         afficher_page_profil();
+    }
+
+    else if ($section == 'parametre'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if ($action == 'deconnexion'){
+                session_destroy();
+                afficher_page_deconnexion();
+            }
+        }
+        afficher_page_parametre();
     }
 
 

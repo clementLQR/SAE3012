@@ -8,20 +8,23 @@
     }
 
     function inscription_utilisateur($identifiant, $mdp){
+        global $twig;
         $success = insert_utilisateur($identifiant, $mdp);
         if ($success) {
+            connecte_utilisateur($identifiant, $mdp);
             return afficher_page_accueil();
         } else {
-            echo "Erreur lors de l'insertion";
+            echo $twig->render("enfant-erreur-inscription.twig.html");
         }
     }
 
     function connexion_utilisateur($identifiant, $mdp){
+        global $twig;
         $success = connecte_utilisateur($identifiant, $mdp);
         if ($success) {
-            return afficher_page_accueil();
+            echo $twig->render("enfant-connexion-reussit.twig.html");
         } else {
-            echo "Erreur lors de l'insertion";
+            echo $twig->render("enfant-erreur-connexion.twig.html");
         }
     }
 
@@ -47,21 +50,36 @@
         global $twig;
         echo $twig -> render('enfant-publier.twig.html',
          ['categories'=> get_all_categorie(),
-         "utilisateurs"=> get_all_utilisateur()]);
+         "utilisateurs"=> $_SESSION['IdUser'] ?? null]);
     }
 
-    function ajouter_message($imageSrc, $idCat, $idUser, $texte){
-        $success = insert_message($imageSrc, $idCat, $idUser, $texte);
-        if ($success) {
-            return afficher_page_profil();
-        } else {
-            echo "Erreur lors de l'insertion";
+    function publier_message($idCat, $idUser, $texte) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $ok = insert_message_avec_image($idCat, $idUser, $texte);
+
+            if ($ok) {
+                header("Location: /categorie/$idCat");
+                exit;
+            } else {
+                echo "Erreur lors de l'envoi du message.";
+            }
         }
     }
 
     function afficher_page_profil(){
         global $twig;
         echo $twig -> render('enfant-profil.twig.html');
+    }
+
+    function afficher_page_parametre(){
+        global $twig;
+        echo $twig -> render('enfant-parametre.twig.html');
+    }
+
+    function afficher_page_deconnexion(){
+        global $twig;
+        echo $twig -> render('enfant-connexion-inscription.twig.html');
     }
 
     function afficher_page_erreur(){

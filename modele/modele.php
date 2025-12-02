@@ -30,44 +30,19 @@
         }
     }
 
-    // function connecte_utilisateur($identifiant, $mdp){
-    //     global $mysqli;
-    //     $query = "SELECT * FROM utilisateur WHERE identifiant = '$identifiant' AND mdp = '$mdp'";
-    //     $result = mysqli_query($mysqli, $query);
-        
-    //     if ($result){
-    //         return true; // connexion réussie
-    //     } else {
-    //         return false; // échec de la connexion
-    //     }
-
-    // }
-
     function connecte_utilisateur($identifiant, $mdp) {
         global $mysqli;
-        // Requête pour chercher l'utilisateur
+
         $query = "SELECT * FROM utilisateur WHERE identifiant = '$identifiant' LIMIT 1";
         $result = mysqli_query($mysqli, $query);
-
-        if (!$result) {
-            die("Erreur SQL : " . mysqli_error($mysqli));
-        }
-
-        $user = mysqli_fetch_assoc($result);
-
-        // Utilisateur introuvable
-        if (!$user) {
+        $utilisateur = mysqli_fetch_assoc($result);
+        if (!$utilisateur) { // Utilisateur introuvable
             return false;
         }
-
-        // Vérification du mot de passe (en clair dans ta BDD)
-        if ($user['mdp'] !== $mdp) {
+        if ($utilisateur['mdp'] !== $mdp) { // Vérification du mot de passe (en clair dans ta BDD)
             return false;
         }
-
-        // Connexion : on enregistre dans la session
-        $_SESSION['user'] = $user;
-
+        $_SESSION['utilisateur'] = $utilisateur;// Connexion : on enregistre dans la session
         return true;
     }
 
@@ -128,23 +103,44 @@
 
     /* publier */
 
-    function insert_message($imageSrc, $idCat, $idUser, $texte){
+    function insert_message_avec_image($idCat, $idUser, $texte) {
         global $mysqli;
-        $query = "INSERT INTO message(date, texte, imageSrc, nbrLike, nbrDislike, nbrCom, IdCat, IdUser) VALUES (NOW(), '$texte', '$imageSrc', 0, 0, 0, $idCat, $idUser)";
+
+        // Vérifier que le dossier existe
+        $upload_dir = "images_upload";
+        if (!is_dir($upload_dir)) {
+            mkdir($upload_dir, 0777, true);
+        }
+
+        // Gestion de l'image
+        $imageSrc = "";
+
+        if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+
+            $imageName = time() . "_" . basename($_FILES['image']['name']);
+            $imagePath = $upload_dir . $imageName;
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
+                $imageSrc = $imagePath;  // chemin sauvegardé en BDD
+            } 
+        }
+
+        // Insertion SQL
+        $query = "
+            INSERT INTO message (date, texte, imageSrc, nbrLike, nbrDislike, nbrCom, IdCat, IdUser)
+            VALUES (NOW(), '$texte', '$imageSrc', 0, 0, 0, $idCat, $idUser)
+        ";
+
         $result = mysqli_query($mysqli, $query);
-        
+
         if ($result) {
-            return true; // succès
+            return true;
         } else {
-            return false; // échec
+            return false;
         }
     }
 
     /* paramètre */
-
-    // function deconexion_utilisateur(){
-        
-    // }
 
 
 

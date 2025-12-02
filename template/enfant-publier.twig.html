@@ -8,9 +8,9 @@
 
 
 {% block contenu %}
-<from method="post" action="/publier">
+<form method="post" action="/SAE3012/publier" enctype="multipart/form-data">
     <label for="imageSrc">Image</label>
-    <input type="text" id="imageSrc" name="imageSrc">
+    <input type="file" name="image" accept="image/*">
     <label for="idCat">Catégorie</label>
     <select name="idCat" id="idCat">
         <option value="">Choisir une catégorie</option>
@@ -20,7 +20,7 @@
     </select>
     <label for="texte">Texte</label>
     <textarea id="texte" name="texte" ></textarea>
-    <input type="hidden" name="idUser" value="1"> <!-- mettre en valeur {{utilisateur.IdUser}} une fois qu'on a fait la fonction qui permet de vérifier qu'un user est connecté -->
+    <input type="hidden" name="idUser" value="1"> 
     <button type="submit">Publier</button> 
 </from>
 {% endblock %}
