@@ -20,7 +20,7 @@
     </select>
     <label for="texte">Texte</label>
     <textarea id="texte" name="texte" ></textarea>
-    <input type="hidden" name="idUser" value="1"> 
+    <input type="hidden" name="idUser" value="{{ utilisateur.IdUser }}">
     <button type="submit">Publier</button> 
 </from>
 {% endblock %}

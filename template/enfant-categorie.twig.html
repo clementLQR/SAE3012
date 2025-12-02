@@ -13,7 +13,9 @@
     <div>
         <h2>{{ message.auteur }}</h2>
         <p>{{ message.date }}</p>
-        <img src="../{{ message.imageSrc }}" alt="Message Image de {{ message.auteur }}"> 
+        {% if message.imageSrc %}
+            <img src="../{{ message.imageSrc }}" alt="Message Image de {{ message.auteur }}"> 
+        {% endif %}
         <p>{{ message.texte }}</p>
         <div>
             <button type="button">commentaire</button>

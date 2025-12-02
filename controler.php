@@ -46,25 +46,15 @@
         ]);
     }
 
-    function afficher_page_publier(){
+    function afficher_page_publier($utilisateur){
         global $twig;
         echo $twig -> render('enfant-publier.twig.html',
          ['categories'=> get_all_categorie(),
-         "utilisateurs"=> $_SESSION['IdUser'] ?? null]);
+         "utilisateur"=> $utilisateur]);
     }
 
-    function publier_message($idCat, $idUser, $texte) {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-            $ok = insert_message_avec_image($idCat, $idUser, $texte);
-
-            if ($ok) {
-                header("Location: /categorie/$idCat");
-                exit;
-            } else {
-                echo "Erreur lors de l'envoi du message.";
-            }
-        }
+    function publier_message($idCat, $idUser, $texte) { /* surment à mettre dans le routeur */
+        insert_message_avec_image($idCat, $idUser, $texte);
     }
 
     function afficher_page_profil(){
@@ -75,6 +65,11 @@
     function afficher_page_parametre(){
         global $twig;
         echo $twig -> render('enfant-parametre.twig.html');
+    }
+
+    function afficher_page_modifier_biographie(){
+        global $twig;
+        echo $twig -> render('enfant-biographie.twig.html');
     }
 
     function afficher_page_deconnexion(){

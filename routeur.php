@@ -60,11 +60,12 @@
     else if ($section == 'publier'){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $idCat = $_POST['idCat'];
-            $idUser = $_POST['idUser'];
+            $idUser = $_SESSION['utilisateur']['IdUser'];
             $texte = $_POST['texte'];
             publier_message($idCat, $idUser, $texte);
         }
-        afficher_page_publier();
+        $utilisateur = $_SESSION['utilisateur'];
+        afficher_page_publier($utilisateur);
     }
 
     else if ($section == 'profil'){
@@ -76,6 +77,9 @@
             if ($action == 'deconnexion'){
                 session_destroy();
                 afficher_page_deconnexion();
+            }
+            else if ($action == 'biographie'){
+                afficher_page_modifier_biographie();
             }
         }
         afficher_page_parametre();
