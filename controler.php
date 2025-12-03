@@ -8,7 +8,6 @@
     }
 
     function inscription_utilisateur($identifiant, $mdp){
-        global $twig;
         $success = insert_utilisateur($identifiant, $mdp);
         if ($success) {
             connecte_utilisateur($identifiant, $mdp);
@@ -21,7 +20,6 @@
     }
 
     function connexion_utilisateur($identifiant, $mdp){
-        global $twig;
         $success = connecte_utilisateur($identifiant, $mdp);
         if ($success) {
             header('Location: http://localhost/SAE3012' );

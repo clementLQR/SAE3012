@@ -21,6 +21,7 @@
     // echo '<br>'.$action.'<br>';
 
     if ($_SESSION == null && $section != 'connexion-inscription'){
+        header('Location: http://localhost/SAE3012/connexion-inscription' );
         afficher_page_connexion_inscription();
     }
 
@@ -63,6 +64,7 @@
             $idCat = $_POST['idCat'];
             $idUser = $_SESSION['utilisateur']['IdUser'];
             $texte = $_POST['texte'];
+            header('Location: http://localhost/SAE3012' );
             return publier_message($idCat, $idUser, $texte);
         }
         $utilisateur = $_SESSION['utilisateur'];
