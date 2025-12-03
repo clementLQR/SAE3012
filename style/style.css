@@ -1,9 +1,46 @@
 /* --------Téléphone/Par défaut------------ */
-footer {
-    
+* {
+    margin : 0;
+    padding : 0;
+    font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+header {
+    margin :10px;
+    text-align : center;
+}
 
+main {
+    height : 100%;
+    margin : 10px;
+}
+
+footer{
+    display:flex;
+    position : sticky ;
+    bottom : 0;
+    justify-content: space-around;
+    padding-bottom : 10px;
+    padding-top : 10px;
+    background-color : rgb(110, 203, 243);
+}
+
+footer img {
+   max-width : 40px;
+}
+
+form {
+    display : flex;
+    flex-direction: column;
+}
+
+form h1 {
+    text-align : center;
+}
+
+form input {
+    padding-bottom : 15px;
+}
 
 /* -----------Tablette------------ */
 @media only screen and (min-width : 769px) {

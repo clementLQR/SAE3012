@@ -29,7 +29,7 @@
                     "dev-main": "3.6-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "function.php"
@@ -102,7 +102,7 @@
                     "name": "symfony/polyfill"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -189,7 +189,7 @@
                     "name": "symfony/polyfill"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -272,7 +272,7 @@
             },
             "time": "2025-10-29T15:56:47+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/Resources/core.php",

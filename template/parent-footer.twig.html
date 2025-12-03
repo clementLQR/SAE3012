@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+    {% block styles %}
     <link rel="stylesheet" href="style/style.css">
+    {% endblock %}
 </head>
 <body>
 
@@ -18,13 +20,15 @@
 
     <main>
         {% block contenu %}
+        
+        </b>ores doloribus quae hic! Atque fuga quo ipsum dolores magni amet voluptatibus esse itaque.
         {% endblock %}
     </main>
     
     <footer>
-        <a href="http://localhost/SAE3012/"><img src="../images/accueil.png" alt="accueil"></a>
-        <a href="http://localhost/SAE3012/publier"><img src="../images/poster.png" alt="publier"></a>
-        <a href="http://localhost/SAE3012/profil"><img src="../images/profil.png" alt="profil"></a>
+        <a href="http://localhost/SAE3012/"><img src="images/accueil.png" alt="accueil"></a>
+        <a href="http://localhost/SAE3012/publier"><img src="images/poster.png" alt="publier"></a>
+        <a href="http://localhost/SAE3012/profil"><img src="images/profil.png" alt="profil"></a>
     </footer>
 </body>
 </html>
