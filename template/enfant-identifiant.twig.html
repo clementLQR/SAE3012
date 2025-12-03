@@ -1,0 +1,16 @@
+{% extends 'parent-footer.twig.html' %}
+{% block title %}Publier{% endblock %}
+
+
+{% block header %}
+<h1>Changer de pseudo</h1>
+{% endblock %} 
+
+
+{% block contenu %}
+    <form method="post" action="/SAE3012/parametre/identifiant">
+        <label for="identifiant">Identifiant</label>
+        <input type="text" id="identifiant" name="identifiant">
+        <button type="submit">Modifier</button>
+    </form>
+{% endblock %}

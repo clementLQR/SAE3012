@@ -11,18 +11,19 @@
 <p>Liste des messages de la categorie {{categorie.nom}}</p>
 {% for message in messages %}
     <div>
-        <h2>{{ utilisateur.identifiant }}</h2> <!-- {{ utilisateur.identifiant }} ne fonctione pas -->
+        <h2>{{ message.auteur }}</h2>
         <p>{{ message.date }}</p>
-        <img src="{{ message.imageSrc }}" alt="Message Image de {{ utilisateur.identifiant }}"> <!-- {{ utilisateur.identifiant }} ne fonctione pas -->
+        {% if message.imageSrc %}
+            <img src="../{{ message.imageSrc }}" alt="Message Image de {{ message.auteur }}"> 
+        {% endif %}
         <p>{{ message.texte }}</p>
         <div>
-            <button type="button">commenter</button>
-                
+            <button type="button">commentaire</button>
+            <p>{{ message.nbrCom }}</p>
             <button type="button">like</button>
             <p>{{ message.nbrLike }}</p>
             <button type="button">dislike</button>
             <p>{{ message.nbrDislike }}</p>
-
         </div>
     </div>
 {% endfor %}

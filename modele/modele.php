@@ -30,17 +30,22 @@
         }
     }
 
-    function connecte_utilisateur($identifiant, $mdp){
+    function connecte_utilisateur($identifiant, $mdp) {
         global $mysqli;
-        $query = "SELECT * FROM utilisateur WHERE identifiant = '$identifiant' AND mdp = '$mdp'";
-        $result = mysqli_query($mysqli, $query);
-        if ($result){
-            return true; // connexion réussie
-        } else {
-            return false; // échec de la connexion
-        }
 
+        $query = "SELECT * FROM utilisateur WHERE identifiant = '$identifiant' LIMIT 1";
+        $result = mysqli_query($mysqli, $query);
+        $utilisateur = mysqli_fetch_assoc($result);
+        if (!$utilisateur) { // Utilisateur introuvable
+            return false;
+        }
+        if ($utilisateur['mdp'] !== $mdp) { // Vérification du mot de passe (en clair dans ta BDD)
+            return false;
+        }
+        $_SESSION['utilisateur'] = $utilisateur;// Connexion : on enregistre dans la session
+        return true;
     }
+
 
     /* acceuil + categorie */
 
@@ -60,10 +65,113 @@
 
     function get_messages_par_categorie($idCat){
         global $mysqli;
-        $query = "SELECT * FROM message WHERE idCAT = $idCat";
+
+        $query = "
+            SELECT message.*, utilisateur.identifiant AS auteur
+            FROM message
+            JOIN utilisateur ON message.IdUser = utilisateur.IdUser
+            WHERE message.IdCat = $idCat
+            ORDER BY message.date DESC
+        ";
+
         $result = mysqli_query($mysqli, $query);
+
+        if (!$result) {
+            die("Erreur SQL : " . mysqli_error($mysqli));
+        }
+
         $messages = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $messages;
+    }
+
+
+    /* publier */
+
+    function insert_message_avec_image($idCat, $idUser, $texte) {
+        global $mysqli;
+        // Dossier des uploads
+        $upload_dir = "images-upload/";
+        // Création du dossier si absent
+        if (!is_dir($upload_dir)) {
+            mkdir($upload_dir, 0777, true);
+        }
+        $imageSrc = "";
+        // Si une image est envoyée
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+            // Nettoyage du nom du fichier
+            $originalName = basename($_FILES['image']['name']);
+            $originalName = str_replace(" ", "-", $originalName); // remplace les espaces
+            $originalName = strtolower($originalName);
+            // Création du nom final
+            $timestamp = time();
+            $newName = "$timestamp-$originalName";
+            // Chemin complet pour sauvegarde
+            $imagePath = $upload_dir . $newName;
+            // Upload du fichier
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
+                $imageSrc = $imagePath; // ce qui sera enregistré en BDD
+            }
+        }
+        $query = "INSERT INTO message (date, texte, imageSrc, nbrLike, nbrDislike, nbrCom, IdCat, IdUser)
+            VALUES (NOW(), '$texte', '$imageSrc', 0, 0, 0, $idCat, $idUser)";
+        $result = mysqli_query($mysqli, $query);
+
+        return $result ? true : false;
+    }  
+
+    /* paramètre */
+
+    function update_biographie($idUser, $biographie){
+        global $mysqli;
+        $biographie = mysqli_real_escape_string($mysqli, $biographie);
+        $query = "UPDATE utilisateur SET biographie = '$biographie' WHERE IdUser = $idUser";
+        $result = mysqli_query($mysqli, $query);
+
+        if ($result) {
+            return true; // succès
+        } else {
+            return false; // échec
+        }
+    }
+
+    function update_identifiant($idUser, $identifiant){
+        global $mysqli;
+        $queryCheck = "SELECT idUser FROM utilisateur WHERE identifiant = '$identifiant' LIMIT 1";
+        $resultCheck = mysqli_query($mysqli, $queryCheck);
+        if (mysqli_fetch_assoc($resultCheck)) {
+            return false; // L'identifiant existe déjà
+        }
+        $query = "UPDATE utilisateur SET identifiant = '$identifiant' WHERE IdUser = $idUser";
+        $result = mysqli_query($mysqli, $query);
+
+        if ($result) {
+            return true; // succès
+        } else {
+            return false; // échec
+        }
+    }
+
+    function reload_session_user($idUser){
+        global $mysqli;
+
+        $query = "SELECT * FROM utilisateur WHERE IdUser = $idUser LIMIT 1";
+        $result = mysqli_query($mysqli, $query);
+
+        if ($result) {
+            $utilisateur = mysqli_fetch_assoc($result);
+
+            // Recharge les données de session
+            $_SESSION['utilisateur'] = $utilisateur;
+
+            return true;
+        }
+        return false;
+    }
+
+    // réaction
+
+    function ajouter_Like_Dislike(){
+        //
     }
 
     function get_all_commentaire(){
@@ -81,21 +189,6 @@
         $reaction = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $reaction;
     }
-
-    /* publier */
-
-    function insert_message($imageSrc, $idCat, $idUser, $texte){
-        global $mysqli;
-        $query = "INSERT INTO message(date, texte, imageSrc, nbrLike, nbrDislike, IdCat, IdUser) VALUES (NOW(), '$texte', '$imageSrc', 0, 0, $idCat, $idUser)";
-        $result = mysqli_query($mysqli, $query);
-        
-        if ($result) {
-            return true; // succès
-        } else {
-            return false; // échec
-        }
-    }
-
 ?>
 
 
