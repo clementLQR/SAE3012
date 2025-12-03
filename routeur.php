@@ -111,6 +111,7 @@
     }
     
     else{
+        $option = "ERREUR : page non trouvée";
         afficher_page_erreur($option);
     }
 
