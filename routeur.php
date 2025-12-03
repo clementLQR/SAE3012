@@ -54,7 +54,7 @@
             return afficher_page_categorie($action);
         }
         else{
-            return afficher_page_erreur();
+            return afficher_page_erreur($option);
         }
     }
 
@@ -111,7 +111,7 @@
     }
     
     else{
-        afficher_page_erreur();
+        afficher_page_erreur($option);
     }
 
 ?>

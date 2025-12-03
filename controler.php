@@ -12,9 +12,11 @@
         $success = insert_utilisateur($identifiant, $mdp);
         if ($success) {
             connecte_utilisateur($identifiant, $mdp);
+            header('Location: http://localhost/SAE3012' );
             return afficher_page_accueil();
         } else {
-            echo $twig->render("enfant-erreur-inscription.twig.html");
+            $option = "Erreur d'inscription";
+            afficher_page_erreur($option);
         }
     }
 
@@ -22,9 +24,11 @@
         global $twig;
         $success = connecte_utilisateur($identifiant, $mdp);
         if ($success) {
-            echo $twig->render("enfant-connexion-reussit.twig.html");
+            header('Location: http://localhost/SAE3012' );
+            return afficher_page_accueil();
         } else {
-            echo $twig->render("enfant-erreur-connexion.twig.html");
+            $option = "Erreur de connexion";
+            afficher_page_erreur($option);
         }
     }
 
@@ -91,7 +95,8 @@
             reload_session_user($idUser);
             return afficher_page_profil($utilisateur);
         } else {
-            echo "Erreur lors de la modification";
+            $option = "Erreur de la modification";
+            afficher_page_erreur($option);
         }
     }
 
@@ -106,9 +111,10 @@
         echo $twig -> render('enfant-connexion-inscription.twig.html');
     }
 
-    function afficher_page_erreur(){
+    function afficher_page_erreur($option){
         global $twig;
-        echo $twig -> render('enfant-erreur.twig.html');
+        echo $twig -> render('enfant-erreur.twig.html', 
+        ['option' => $option]);
     }
 
 // insert_message('test', 1, 1, 'test de texte');
