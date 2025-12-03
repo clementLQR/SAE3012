@@ -111,7 +111,7 @@
         echo $twig -> render('enfant-connexion-inscription.twig.html');
     }
 
-    function afficher_page_erreur($option){
+    function afficher_page_erreur($option=null){
         global $twig;
         echo $twig -> render('enfant-erreur.twig.html', 
         ['option' => $option]);
