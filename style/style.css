@@ -5,6 +5,11 @@
     font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+body{
+    background-color: #212529;
+    color: white;
+}
+
 header {
     margin :10px;
     text-align : center;
@@ -29,16 +34,16 @@ footer img {
    max-width : 40px;
 }
 
-form {
+.formConnexion, .formInscription{
     display : flex;
     flex-direction: column;
 }
 
-form h1 {
+.formConnexion h1, .formInscription h1 {
     text-align : center;
 }
 
-form input {
+.formConnexion input, .formInscription input {
     padding-bottom : 15px;
 }
 
