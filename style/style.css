@@ -11,7 +11,7 @@ body{
 }
 
 header {
-    margin :10px;
+    margin :10px 10px 50px 10px;
     text-align : center;
 }
 
@@ -34,18 +34,46 @@ footer img {
    max-width : 40px;
 }
 
-.formConnexion, .formInscription{
+h1 {
+    text-align : center;
+}
+
+/* connexion - inscription */
+
+.formConnexion, .formInscription, .formPublier {
     display : flex;
     flex-direction: column;
 }
 
-.formConnexion h1, .formInscription h1 {
-    text-align : center;
+form input, form select, form button, form textarea{
+    margin: 15px 0 15px;
+    border-radius: 8px;
+    padding: 5px;
+    background-color: #c4c4c4;
 }
 
-.formConnexion input, .formInscription input {
-    padding-bottom : 15px;
+form textarea{
+    min-width : 100%;
+    max-width : 100%;
+    min-height: 100px;
+    max-height: 100px;
 }
+
+form label{
+    margin-top: 10px;
+}
+
+/* Publier */
+.formPublier{
+    border: solid #646464;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+
+
+
+
 
 /* -----------Tablette------------ */
 @media only screen and (min-width : 769px) {

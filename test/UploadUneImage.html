@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Input fichier stylé</title>
+<style>
+  :root{
+    --bg:#0f1724;
+    --card:#0b1220;
+    --accent:#0ea5ff;
+    --muted:#94a3b8;
+    --glass: rgba(255,255,255,0.03);
+    --success: #10b981;
+    --danger: #ef4444;
+    --radius: 12px;
+    --transition: 180ms ease;
+  }
+
+  *{box-sizing:border-box;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
+  body{
+    margin:24px;
+    background: linear-gradient(180deg,#071022 0%, #081226 100%);
+    color: #e6eef8;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:15px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .uploader{
+    width:100%;
+    max-width:560px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: var(--radius);
+    padding:18px;
+    box-shadow: 0 6px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .label{
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+
+  .title{
+    font-weight:600;
+    font-size:16px;
+  }
+  .desc{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:6px;
+  }
+
+  /* zone drag/drop */
+  .dropzone{
+    margin-top:14px;
+    border-radius:10px;
+    padding:16px;
+    display:flex;
+    gap:16px;
+    align-items:center;
+    justify-content:space-between;
+    background:var(--glass);
+    border: 1px dashed rgba(255,255,255,0.04);
+    transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition), background var(--transition);
+    cursor:pointer;
+  }
+
+  .dropzone:hover{ transform: translateY(-2px); box-shadow: 0 8px 30px rgba(8,12,20,0.6) }
+  .dropzone.dragover{
+    background: linear-gradient(90deg, rgba(14,165,255,0.06), rgba(16,185,129,0.02));
+    border-color: rgba(14,165,255,0.55);
+    box-shadow: 0 10px 40px rgba(14,165,255,0.06);
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  /* hidden native input */
+  input[type="file"]{
+    position:absolute;
+    width:1px;height:1px;
+    padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+  }
+
+  /* left column */
+  .left{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    flex:1;
+    min-width:0;
+  }
+  .icon-wrap{
+    width:56px;
+    height:56px;
+    border-radius:10px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    display:grid;
+    place-items:center;
+    border:1px solid rgba(255,255,255,0.03);
+    flex-shrink:0;
+  }
+  .info{
+    min-width:0;
+  }
+  .info .name{
+    font-weight:600;
+    font-size:14px;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .info .meta{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:4px;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+
+  /* right column: actions */
+  .actions{
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+  .btn{
+    padding:10px 14px;
+    border-radius:10px;
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    color:inherit;
+    font-weight:600;
+    cursor:pointer;
+    transition: all var(--transition);
+  }
+  .btn.primary{
+    background: linear-gradient(90deg,var(--accent), #7dd3fc);
+    color:#04293a;
+    border: none;
+    box-shadow: 0 6px 18px rgba(14,165,255,0.12);
+  }
+  .btn.ghost{
+    background:transparent;
+  }
+  .btn:focus{ outline:3px solid rgba(14,165,255,0.14); outline-offset:2px }
+
+  /* preview thumbnail */
+  .thumb{
+    margin-top:12px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+  .thumb img{
+    width:72px;
+    height:72px;
+    object-fit:cover;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 6px 20px rgba(4,9,18,0.6);
+  }
+  .thumb .tinfo{
+    min-width:0;
+  }
+  .small-muted{ color:var(--muted); font-size:13px }
+
+  /* responsive */
+  @media (max-width:520px){
+    .dropzone{ flex-direction:column; align-items:stretch; text-align:center }
+    .left{ justify-content:center }
+    .actions{ justify-content:center }
+  }
+</style>
+</head>
+<body>
+  <div class="uploader" aria-live="polite">
+    <div class="label">
+      <div class="title">Importer un fichier</div>
+    </div>
+    <div class="desc">Glissez-déposez ou sélectionnez un fichier image (png, jpg, webp). Aperçu et nom affichés.</div>
+
+    <!-- zone -->
+    <label class="dropzone" id="dropzone" for="fileInput" tabindex="0" role="button" aria-label="Ajouter un fichier">
+      <div class="left">
+        <div class="icon-wrap" aria-hidden="true">
+          <!-- simple SVG icon -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 7l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21 21H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="info">
+          <div class="name" id="fz-name">Aucun fichier sélectionné</div>
+          <div class="meta small-muted" id="fz-meta">PNG, JPG, WEBP — max 10 MB</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn ghost" id="chooseBtn">Choisir</button>
+        <button type="button" class="btn primary" id="clearBtn" style="display:none">Supprimer</button>
+      </div>
+
+      <!-- accessible file input (hidden) -->
+      <input id="fileInput" type="file" accept="image/*" />
+    </label>
+
+    <!-- preview -->
+    <div class="thumb" id="preview" style="display:none">
+      <img id="previewImg" alt="Aperçu de l'image" src="" />
+      <div class="tinfo">
+        <div id="previewName" class="name"></div>
+        <div id="previewSize" class="small-muted"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // éléments
+  const input = document.getElementById('fileInput');
+  const dropzone = document.getElementById('dropzone');
+  const chooseBtn = document.getElementById('chooseBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const nameEl = document.getElementById('fz-name');
+  const metaEl = document.getElementById('fz-meta');
+  const preview = document.getElementById('preview');
+  const previewImg = document.getElementById('previewImg');
+  const previewName = document.getElementById('previewName');
+  const previewSize = document.getElementById('previewSize');
+
+  // helper format taille
+  function humanSize(bytes){
+    if(bytes < 1024) return bytes + ' B';
+    const units = ['KB','MB','GB'];
+    let i = -1;
+    do { bytes = bytes/1024; i++; } while(bytes >= 1024 && i < units.length-1);
+    return bytes.toFixed(bytes >= 10 ? 0 : 1) + ' ' + units[i];
+  }
+
+  // ouverture du sélecteur via bouton
+  chooseBtn.addEventListener('click', e => input.click());
+  // label déjà cible le input; on gère aussi le bouton clear
+  clearBtn.addEventListener('click', e => {
+    input.value = '';
+    resetPreview();
+  });
+
+  // gestion du fichier sélectionné
+  input.addEventListener('change', e => handleFiles(e.target.files));
+
+  // drag & drop events
+  ['dragenter','dragover'].forEach(ev => {
+    dropzone.addEventListener(ev, e => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.add('dragover');
+    });
+  });
+  ['dragleave','drop','dragend'].forEach(ev => {
+    dropzone.addEventListener(ev, e => {
+      e.preventDefault();
+      e.stopPropagation();
+      if(ev === 'drop'){
+        const files = e.dataTransfer.files;
+        if(files && files.length) input.files = files; // set files to input
+        handleFiles(input.files || files);
+      }
+      dropzone.classList.remove('dragover');
+    });
+  });
+
+  // keyboard accessible: press Enter/Space to open file dialog
+  dropzone.addEventListener('keydown', e => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      input.click();
+    }
+  });
+
+  function handleFiles(files){
+    if(!files || files.length === 0) {
+      resetPreview();
+      return;
+    }
+    const file = files[0];
+
+    // taille max check (ex: 10MB)
+    const maxBytes = 10 * 1024 * 1024;
+    if(file.size > maxBytes){
+      alert('Le fichier est trop volumineux (max 10 MB).');
+      input.value = '';
+      resetPreview();
+      return;
+    }
+
+    // afficher nom + type
+    nameEl.textContent = file.name;
+    metaEl.textContent = file.type || 'Fichier';
+    clearBtn.style.display = 'inline-block';
+
+    // si c'est une image, afficher aperçu
+    if(file.type && file.type.startsWith('image/')){
+      const reader = new FileReader();
+      reader.onload = function(evt){
+        previewImg.src = evt.target.result;
+        previewName.textContent = file.name;
+        previewSize.textContent = humanSize(file.size);
+        preview.style.display = 'flex';
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // pas d'image : masquer preview et montrer type
+      preview.style.display = 'none';
+      previewImg.src = '';
+    }
+  }
+
+  function resetPreview(){
+    nameEl.textContent = 'Aucun fichier sélectionné';
+    metaEl.textContent = 'PNG, JPG, WEBP — max 10 MB';
+    preview.style.display = 'none';
+    previewImg.src = '';
+    clearBtn.style.display = 'none';
+  }
+</script>
+</body>
+</html>

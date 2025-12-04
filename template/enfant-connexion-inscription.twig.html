@@ -7,8 +7,11 @@
 {% endblock %} 
 
 {% block contenu %}
+
 <div class="containerConnexionInscription">
-    <div class="connexion">
+    <button class="btn" data-target="connexion">Connexion</button>
+    <button class="btn" data-target="inscription">Inscription</button>
+    <div id="connexion" class="formulaire">
         <h3>Connexion</h3>
         <form method="post" action="/SAE3012/connexion-inscription/connexion" class="formConnexion">
             <label for="identifiant">Identifiant :</label>
@@ -19,7 +22,7 @@
         </form>
     </div>
 
-    <div class="inscription">
+    <div id="inscription" class="formulaire">
         <h3>Inscription</h3>
         <form method="post" action="/SAE3012/connexion-inscription/inscription" class="formInscription">
             <label for="nouvel_identifiant">Identifiant :</label>
@@ -31,5 +34,5 @@
     </div>
 </div>
 
-<script src="style.js"></script>
+<script src="script/pageConnexionInscription.js"></script>
 {% endblock %}
