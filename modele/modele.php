@@ -170,9 +170,6 @@
 
     // réaction
 
-    function ajouter_Like_Dislike(){
-        //
-    }
 
     function get_all_commentaire(){
         global $mysqli;
@@ -189,6 +186,8 @@
         $reaction = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $reaction;
     }
+
+    
 ?>
 
 

@@ -14,18 +14,46 @@
         <h2>{{ message.auteur }}</h2>
         <p>{{ message.date }}</p>
         {% if message.imageSrc %}
-            <img src="../{{ message.imageSrc }}" alt="Message Image de {{ message.auteur }}"> 
+            <img src="{{ message.imageSrc }}" alt="Message Image de {{ message.auteur }}"> 
         {% endif %}
         <p>{{ message.texte }}</p>
         <div>
             <button type="button">commentaire</button>
             <p>{{ message.nbrCom }}</p>
-            <button type="button">like</button>
-            <p>{{ message.nbrLike }}</p>
-            <button type="button">dislike</button>
-            <p>{{ message.nbrDislike }}</p>
+            <button class="likeBtn" data-id="{{ message.IdMsg }}">Like <span>{{ message.nbrLike }}</span></button>
+            <button class="dislikBtn" data-id="{{ message.IdMsg }}">Dislike <span>{{ message.nbrDislike }}</span></button>
         </div>
     </div>
 {% endfor %}
+
+<script>
+    document.querySelectorAll('.likeBtn').forEach(button => {
+        button.addEventListener('click', () => {
+            const messageId = button.id;
+            fetch(`../reaction`, {
+                method: 'POST'
+            })
+            .then(reactions => reactions.json())
+            .then(data => {
+                button.querySelector('span').textContent = data.nbrLike;
+            });
+        });
+    });
+
+    document.querySelectorAll('.dislikeBtn').forEach(button => {
+        button.addEventListener('click', () => {
+            const messageId = button.id;
+            fetch(`../reaction`, {
+                method: 'POST'
+            })
+            .then(reactions => reactions.json())
+            .then(data => {
+                button.querySelector('span').textContent = data.nbrDislike;
+            });
+        });
+    });
+</script>
+
+
 
 {% endblock %}

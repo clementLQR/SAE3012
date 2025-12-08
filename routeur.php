@@ -12,11 +12,11 @@
     $section = $pathExplode[1] ?? null;  
     $action  = $pathExplode[2] ?? null; 
 
-    echo '<br>';
-    print_r($pathExplode);
-    echo '<br>';
-    print_r($_SESSION);
-    echo '<br>';
+    // echo '<br>';
+    // print_r($pathExplode);
+    // echo '<br>';
+    // print_r($_SESSION);
+    // echo '<br>';
     // echo '<br>'.$section.'<br>';
     // echo '<br>'.$action.'<br>';
 
@@ -44,20 +44,39 @@
         
     }
 
-    else if ($section == 'categorie'){
-        if ($action == null){
-            return afficher_page_accueil();
-        }
-        else if ($action == 'commenter'){
-            //
-        }
-        else if (is_numeric($action)){
-            return afficher_page_categorie($action);
-        }
-        else{
-            return afficher_page_erreur($option);
-        }
+    else if ($section == 'jeux%20vid%C3%A9o'){
+        return afficher_page_categorie(1);
     }
+
+    else if ($section == 'musique'){
+        return afficher_page_categorie(2);
+    }
+
+    else if ($section == 'film'){
+        return afficher_page_categorie(3);
+    }
+
+    else if ($section == 'livres'){
+        return afficher_page_categorie(4);
+    }
+
+    else if ($section == 'sport'){
+        return afficher_page_categorie(5);
+    }
+
+    else if ($section == 'peinture%20et%20dessin'){
+        return afficher_page_categorie(6);
+    }
+
+    else if ($section == 'photographie'){
+        return afficher_page_categorie(7);
+    }
+
+    else if ($section == 's%C3%A9ries'){
+        return afficher_page_categorie(8);
+    }
+
+
 
     else if ($section == 'publier'){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){

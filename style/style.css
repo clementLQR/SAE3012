@@ -8,6 +8,7 @@
 body{
     background-color: #212529;
     color: white;
+    min-height: 100vh;
 }
 
 header {
@@ -23,7 +24,7 @@ main {
 footer{
     display:flex;
     position : sticky ;
-    bottom : 0;
+    bottom : 0px;
     justify-content: space-around;
     padding-bottom : 10px;
     padding-top : 10px;
@@ -53,8 +54,8 @@ form input, form select, form button, form textarea{
 }
 
 form textarea{
-    min-width : 100%;
-    max-width : 100%;
+    min-width : calc(100% - 10px);
+    max-width : calc(100% - 10px);
     min-height: 100px;
     max-height: 100px;
 }

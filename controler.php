@@ -38,7 +38,6 @@
     
     function afficher_page_categorie($idCat){
         global $twig;
-        print_r(get_messages_par_categorie($idCat));
         echo $twig -> render('enfant-categorie.twig.html', 
         ['categorie' => get_categorie($idCat),
         "messages" => get_messages_par_categorie($idCat),
@@ -114,6 +113,7 @@
         echo $twig -> render('enfant-erreur.twig.html', 
         ['option' => $option]);
     }
+
 
 // insert_message('test', 1, 1, 'test de texte');
 ?>
