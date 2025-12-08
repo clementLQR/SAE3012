@@ -78,38 +78,35 @@
 
     else if ($section == 'parametre'){        
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if ($action == 'deconnexion'){
-                session_destroy();
-                return afficher_page_deconnexion();
-            }
-        }
-        if ($action == 'biographie'){
-            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $idUser = $_SESSION['utilisateur']['IdUser'];
-                $biographie = $_POST['biographie'];
-                $utilisateur = $_SESSION['utilisateur'];
-                return update_bio($idUser, $biographie, $utilisateur);
-            }
-            return afficher_page_modifier_biographie();
-        }
-        if ($action == 'identifiant'){
-            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $idUser = $_SESSION['utilisateur']['IdUser'];
-                $identifiant = $_POST['identifiant'];
-                $utilisateur = $_SESSION['utilisateur'];
-                update_pseudo($idUser, $identifiant, $utilisateur);
-            }
-            return afficher_page_modifier_identifiant();
+            session_destroy();
+            return afficher_page_deconnexion();
         }
         else{
             afficher_page_parametre();
         }
         
     }
-
+    else if ($section == 'biographie'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $idUser = $_SESSION['utilisateur']['IdUser'];
+            $biographie = $_POST['biographie'];
+            $utilisateur = $_SESSION['utilisateur'];
+            return update_bio($idUser, $biographie, $utilisateur);
+        }
+        return afficher_page_modifier_biographie();
+    }
+    else if ($section == 'identifiant'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $idUser = $_SESSION['utilisateur']['IdUser'];
+            $identifiant = $_POST['identifiant'];
+            $utilisateur = $_SESSION['utilisateur'];
+            update_pseudo($idUser, $identifiant, $utilisateur);
+        }
+        return afficher_page_modifier_identifiant();
+    }
 
     else if ($section == null || $section == 'accueil'){
-        afficher_page_accueil();
+        return afficher_page_accueil();
     }
     
     else{
