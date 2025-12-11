@@ -31,11 +31,4 @@
             console.log("Les mots de passe ne correspondent pas.");
             alert("Les mots de passe ne correspondent pas.");
         }
-        // if (mdp.value !== confirmation.value) {
-        //     e.preventDefault(); // Empêche l'envoi
-        //     alert("Les mots de passe ne correspondent pas.");
-        // }
-        // else {
-        //     form.submit();
-        // }
     });
