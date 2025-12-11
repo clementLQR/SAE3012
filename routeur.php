@@ -105,6 +105,13 @@
         }
         
     }
+
+    else if ($section == 'deconnexion'){        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            session_destroy();
+            return afficher_page_deconnexion();
+    }}
+
     else if ($section == 'biographie'){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $idUser = $_SESSION['utilisateur']['IdUser'];

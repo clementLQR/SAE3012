@@ -20,3 +20,22 @@
 
     // Afficher le premier texte par défaut
     buttons[0].click();
+
+    const form = document.getElementById('formInscription');
+    const mdp = document.getElementById('nouveau_mdp');
+    const confirmation = document.getElementById('confirmation_mdp');
+
+    form.addEventListener('submit', function(e) {
+        if (mdp.value !== confirmation.value) {
+            e.preventDefault(); // Empêche l'envoi
+            console.log("Les mots de passe ne correspondent pas.");
+            alert("Les mots de passe ne correspondent pas.");
+        }
+        // if (mdp.value !== confirmation.value) {
+        //     e.preventDefault(); // Empêche l'envoi
+        //     alert("Les mots de passe ne correspondent pas.");
+        // }
+        // else {
+        //     form.submit();
+        // }
+    });
