@@ -44,7 +44,7 @@
         
     }
 
-    else if ($section == 'jeux%20vid%C3%A9o'){
+    else if ($section == 'jeux%20video'){
         return afficher_page_categorie(1);
     }
 
@@ -72,7 +72,7 @@
         return afficher_page_categorie(7);
     }
 
-    else if ($section == 's%C3%A9ries'){
+    else if ($section == 'series'){
         return afficher_page_categorie(8);
     }
 

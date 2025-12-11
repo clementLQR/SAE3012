@@ -1,30 +1,97 @@
 {% extends 'parent-footer.twig.html' %}
 
 {% block title %}Connexion{% endblock %}
+{% block style %}
+<style>
+    h1 {
+        font-size : 50px;
+        padding-top : 20px;
+    
+    }
+
+    .boutons {
+        display: flex;
+        justify-content : space-around;
+        margin-top : 50px;
+        margin-bottom : 50px;
+    }
+
+    
+    .btn {
+        font-size:30px;
+        background: linear-gradient(rgb(110, 203, 243),rgb(7, 101, 142));
+        /* background-color: rgb(110, 203, 243); */
+        display: flex;
+        padding : 20px 10px 20px 10px;
+        width : 50%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .btn:active {
+        background-color: rgb(50, 122, 153);
+    }
+
+    form {
+        display : flex;
+        flex-direction : column;
+        justify-content: center;
+        font-size : 25px;
+        margin : 20px;
+    }
+
+    form label {
+        margin-bottom : 15px;
+    }
+
+    form input {
+        height : 35px;
+        margin-bottom : 40px;
+    }
+
+    form button {
+        margin-top : 25px;
+        font-size : 25px;
+        padding : 10px;
+        width : 200px;
+        margin: auto;
+    }
+
+    footer {
+        display : none;
+    }
+
+
+
+
+
+</style>
+{% endblock %}
 
 {% block header %}
-    <h1>Connexion / Inscription</h1>
-{% endblock %} 
+<h1>Bienvenu(e) sur Free Message</h1>
+{% endblock %}
 
 {% block contenu %}
 
 <div class="containerConnexionInscription">
-    <button class="btn" data-target="connexion">Connexion</button>
-    <button class="btn" data-target="inscription">Inscription</button>
+    <div class="boutons">
+        <button class="btn" data-target="connexion">Connexion</button>
+        <button class="btn" data-target="inscription">Inscription</button>
+    </div>
     <div id="connexion" class="formulaire">
-        <h3>Connexion</h3>
         <form method="post" action="/SAE3012/connexion-inscription/connexion" class="formConnexion">
             <label for="identifiant">Identifiant :</label>
             <input type="text" id="identifiant" name="identifiant" required>
             <label for="mdp">Mot de passe :</label>
-            <input type="text" id="mdp" name="mdp"  required>
+            <input type="text" id="mdp" name="mdp" required>
             <button type="submit">Se connecter</button>
         </form>
     </div>
 
     <div id="inscription" class="formulaire">
-        <h3>Inscription</h3>
-        <form method="post" action="/SAE3012/connexion-inscription/inscription" class="formInscription" id="formInscription">
+        <form method="post" action="/SAE3012/connexion-inscription/inscription" class="formInscription"
+            id="formInscription">
             <label for="nouvel_identifiant">Identifiant :</label>
             <input type="text" id="nouvel_identifiant" name="nouvel_identifiant" required>
 
