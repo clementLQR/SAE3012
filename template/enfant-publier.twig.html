@@ -16,7 +16,6 @@
         margin-bottom: 50px;
     }
 
-
     .btn {
         font-size: 30px;
         background: linear-gradient(rgb(110, 203, 243), rgb(7, 101, 142));
@@ -61,6 +60,7 @@
     textarea {
         height: 120px;
         border-radius : 5px;
+        resize: none;
     }
 
     button {
@@ -86,6 +86,7 @@
 <form method="post" action="/SAE3012/publier" enctype="multipart/form-data" class="formPublier">
     <label for="image"><strong>Image</strong></label>
     <input type="file" name="image" accept="image/*">
+    <img id="previewImage" src="#" alt="Aperçu de l'image" style="display:none; max-width: 200px; margin-top: 10px;">
     <label for="idCat"><strong>Catégorie *</strong></label>
     <select name="idCat" id="idCat" required>
         <option value="">Choisir une catégorie</option>
@@ -98,4 +99,22 @@
     <input type="hidden" name="idUser" value="{{ utilisateur.IdUser }}">
     <button type="submit">Publier</button>
     </from>
+
+<script>
+    document.querySelector('input[name="image"]').addEventListener('change', function(event) {
+        const preview = document.getElementById('previewImage');
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '#';
+            preview.style.display = 'none';
+        }
+    });
+</script>
     {% endblock %}
