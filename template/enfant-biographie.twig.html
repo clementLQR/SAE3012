@@ -1,18 +1,59 @@
 {% extends 'parent-footer.twig.html' %}
-{% block title %}Publier{% endblock %}
+{% block title %}Biographie{% endblock %}
 
+{% block style %}
+<style>
+    h1 {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+
+    label {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    input {
+        height: 250px;
+        border-radius: 10px;
+    }
+
+    button {
+
+        font-size: 23px;
+        padding: 10px;
+        width: 40%;
+        margin: auto;
+    }
+
+    div {
+       
+    }
+</style>
+
+{% endblock %}
 
 {% block header %}
 <h1>Modifier la biographie</h1>
-{% endblock %} 
+{% endblock %}
 
 
 {% block contenu %}
 
 <form method="post" action="/SAE3012/parametre/biographie">
-    <label for="biographie">Biographie</label>
-    <input type="text" id="biographie" name="biographie">
-    <button type="submit">Modifier</button>
+    <label for="biographie">Rédigez votre biographie : </label>
+    <textarea id="biographie" name="biographie"></textarea>
+    <div>
+        <button type="submit">Enregistrer</button>
+        <button href="http://localhost/SAE3012/parametre">Annuler</button>
+    </div>
 </form>
 
 {% endblock %}

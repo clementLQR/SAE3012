@@ -3,47 +3,44 @@
 {% block style %}
 <style>
     h1 {
-        font-size : 40px;
-        margin-bottom : 30px;
+        font-size: 40px;
+        margin-bottom: 30px;
     }
-    
-    a {
-        display : flex;
-        flex-direction : column;
-        justify-content : center;
-        margin : auto;
-        max-width : 75%;
 
-        
+    a {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+        max-width: 75%;
+        text-decoration: none;
     }
 
     button {
-        font-size : 17px;
-        margin-bottom : 30px;
-        height : 60px;
+        font-size: 17px;
+        margin-bottom: 30px;
+        height: 60px;
         border-radius: 10px;
-        text-decoration: none;
         background-color: rgb(158, 213, 237);
-        
     }
-
+    
 </style>
 
-{% endblock %} 
+{% endblock %}
 
 {% block header %}
-    <h1>Accueil</h1>
-{% endblock %} 
+<h1>Accueil</h1>
+{% endblock %}
 
 
 {% block contenu %}
-    {% for categorie in categories %}
-        <a href="{{ categorie.nom }}"> 
-            <button type="button">
-                <h2>{{ categorie.nom }}</h2>
-                <!-- <img src="{{ categorie.image }}" alt="{{ categorie.nom }}"> -->
-            </button>
-        </a>
-        
-    {% endfor %}
+{% for categorie in categories %}
+<a href="{{ categorie.nom }}">
+    <button type="button">
+        <h2>{{ categorie.nom }}</h2>
+        <!-- <img src="{{ categorie.image }}" alt="{{ categorie.nom }}"> -->
+    </button>
+</a>
+
+{% endfor %}
 {% endblock %}
