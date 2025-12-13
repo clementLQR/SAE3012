@@ -2,25 +2,70 @@
 {% block title %}Profil{% endblock %}
 
 {% block style %}
+<style>
+    h1 {
+        font-size: 40px;
+        margin-bottom: 30px;
+    }
 
-{% endblock %} 
+    h2 {
+        font-size: 25px;
+    }
+
+    div {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+    }
+
+    #param {
+        max-width: 32px;
+        background-color: rgb(110, 203, 243);
+        border-radius: 15px;
+    }
+
+    /* .boutons {
+        display : flex;
+        justify-content : space-around;
+    } */
+
+    .boutons {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    button {
+        border: none;
+        background-color: #212529;
+        font-size: 17px;
+        color: white;
+    }
+
+
+
+</style>
+{% endblock %}
 
 {% block header %}
-    <h1>Profil</h1>
-{% endblock %} 
+<h1>Profil</h1>
+{% endblock %}
 
 
 {% block contenu %}
+<div>
     <h2>{{utilisateur.identifiant}}</h2>
-    <a href="/SAE3012/parametre"><img src="" alt="parametre"></a>
-    
-    <p>{{utilisateur.biographie}}</p>
+    <a href="/SAE3012/parametre">
+        <img id="param" src="images/parametres.png" alt="parametre">
+    </a>
+</div>
+<p>{{utilisateur.biographie}}</p>
 
+<div class="boutons">
     <button>Post</button>
-
-
     <button>Like</button>
+    <button>Commentaires</button>
+</div>
 
-    <button>Commantaires</button>
 
 {% endblock %}

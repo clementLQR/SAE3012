@@ -1,26 +1,101 @@
 {% extends 'parent-footer.twig.html' %}
 {% block title %}Publier{% endblock %}
 
+{% block style %}
+<style>
+    h1 {
+        font-size: 40px;
+        margin-bottom: 40px;
+
+    }
+
+    .boutons {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+
+    .btn {
+        font-size: 30px;
+        background: linear-gradient(rgb(110, 203, 243), rgb(7, 101, 142));
+        /* background-color: rgb(110, 203, 243); */
+        display: flex;
+        padding: 20px 10px 20px 10px;
+        width: 50%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .btn:active {
+        background-color: rgb(50, 122, 153);
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        font-size: 25px;
+        border: solid 2px rgba(235, 240, 242, 0.749);
+        border-radius: 20px;
+        padding: 20px;
+        height: 600px;
+    }
+
+    label {
+        margin-bottom : 10px;
+    }
+
+    label:first-child {
+        margin-top : 8px;
+    }
+
+    input, select{
+        margin-bottom: 50px;
+        font-size: 15px;
+        height : 30px;
+        padding : 5px;
+        border-radius : 5px;
+    }
+
+    textarea {
+        height: 120px;
+        border-radius : 5px;
+    }
+
+    button {
+        font-size : 23px;
+        padding : 10px;
+        width : 200px;
+        margin: auto;
+    }
+
+</style>
+
+
+</style>
+
+{% endblock %}
 
 {% block header %}
 <h1>Publier un message</h1>
-{% endblock %} 
+{% endblock %}
 
 
 {% block contenu %}
 <form method="post" action="/SAE3012/publier" enctype="multipart/form-data" class="formPublier">
-    <label for="image">Image</label>
+    <label for="image"><strong>Image</strong></label>
     <input type="file" name="image" accept="image/*">
-    <label for="idCat">Catégorie</label>
-    <select name="idCat" id="idCat">
+    <label for="idCat"><strong>Catégorie *</strong></label>
+    <select name="idCat" id="idCat" required>
         <option value="">Choisir une catégorie</option>
         {% for categorie in categories %}
-            <option value="{{ categorie.IdCat }}">{{ categorie.nom }}</option>
+        <option value="{{ categorie.IdCat }}">{{ categorie.nom }}</option>
         {% endfor %}
     </select>
-    <label for="texte">Texte</label>
-    <textarea id="texte" name="texte" ></textarea>
+    <label for="texte"><strong>Texte *</strong></label>
+    <textarea id="texte" name="texte" required></textarea>
     <input type="hidden" name="idUser" value="{{ utilisateur.IdUser }}">
-    <button type="submit">Publier</button> 
-</from>
-{% endblock %}
+    <button type="submit">Publier</button>
+    </from>
+    {% endblock %}
