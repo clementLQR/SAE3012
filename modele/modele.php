@@ -84,6 +84,27 @@
         return $messages;
     }
 
+    function get_messages_par_utilisateur($idUser){
+        global $mysqli;
+
+        $query = "
+            SELECT message.*, categorie.nom AS categorieNom
+            FROM message
+            JOIN categorie ON message.IdCat = categorie.idCat
+            WHERE message.IdUser = $idUser
+            ORDER BY message.date DESC
+        ";
+
+        $result = mysqli_query($mysqli, $query);
+
+        if (!$result) {
+            die("Erreur SQL : " . mysqli_error($mysqli));
+        }
+
+        $messages = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $messages;
+    }
+
 
     /* publier */
 
@@ -116,8 +137,31 @@
             VALUES (NOW(), '$texte', '$imageSrc', 0, 0, 0, $idCat, $idUser)";
         $result = mysqli_query($mysqli, $query);
 
-        return $result ? true : false;
+        if ($result) {
+            return true; // succès
+        } else {
+            return false; // échec
+        }
     }  
+
+    /* Supprimer message */
+
+    function delete_message($messageId){
+        global $mysqli;
+        $queryReactions = "DELETE FROM reaction WHERE IdMsg = $messageId";
+        mysqli_query($mysqli, $queryReactions);
+        $queryCommentaires = "DELETE FROM commentaire WHERE IdMsg = $messageId";
+        mysqli_query($mysqli, $queryCommentaires);
+        $query = "DELETE FROM message WHERE idMsg = $messageId";
+        $result = mysqli_query($mysqli, $query);
+
+        if ($result) {
+            return true; // succès
+        } else {
+            return false; // échec
+        }
+    }
+
 
     /* paramètre */
 

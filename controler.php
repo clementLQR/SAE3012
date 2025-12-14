@@ -60,8 +60,14 @@
 
     function afficher_page_profil($utilisateur){
         global $twig;
+        print_r(get_messages_par_utilisateur($utilisateur['IdUser']));
         echo $twig -> render('enfant-profil.twig.html',
-        ["utilisateur"=> $utilisateur]);
+        ["utilisateur"=> $utilisateur,
+        "messages"=> get_messages_par_utilisateur($utilisateur['IdUser'])]);
+    }
+
+     function supprimer_message($messageId){
+        delete_message($messageId);
     }
 
     function afficher_page_parametre(){

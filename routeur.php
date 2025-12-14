@@ -179,6 +179,10 @@
     }
 
     else if ($section == 'profil'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $messageId = $_POST['messageId'];
+            supprimer_message($messageId);
+        }
         $utilisateur = $_SESSION['utilisateur'];
         afficher_page_profil($utilisateur);
     }

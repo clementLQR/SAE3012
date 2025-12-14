@@ -112,5 +112,22 @@
     <button>Commentaires</button>
 </div>
 
+{% for message in messages %}
+    <div class="msg">
+        <h2>{{ message.categorieNom }}</h2>
+        <form action="/SAE3012/profil" method="post">
+            <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
+            <button type="submit"> <img src="#" alt="suppirmer message"></button>
+        </form>
+        
+        <p>{{ message.date }}</p>
+        {% if message.imageSrc %}
+            <img src="{{ message.imageSrc }}" alt="Message Image de {{ message.auteur }}"> 
+        {% endif %}
+        <p>{{ message.texte }}</p>
+        {{ message.nbrLike }} Likes - {{ message.nbrDislike }} Dislikes - {{ message.nbrCom }} Commentaires
+    </div>
+{% endfor %}
+
 
 {% endblock %}
