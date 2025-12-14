@@ -12,15 +12,15 @@
     $section = $pathExplode[1] ?? null;  
     $action  = $pathExplode[2] ?? null; 
 
-    echo '<br>';
-    print_r($pathExplode);
-    echo '<br>';
-    print_r($_SESSION);
-    echo '<br>';
-    echo '<br>'.$section.'<br>';
-    echo '<br>'.$action.'<br>';
-    print_r($_POST);
-    echo '<br>';
+    // echo '<br>';
+    // print_r($pathExplode);
+    // echo '<br>';
+    // print_r($_SESSION);
+    // echo '<br>';
+    // echo '<br>'.$section.'<br>';
+    // echo '<br>'.$action.'<br>';
+    // print_r($_POST);
+    // echo '<br>';
 
     if ($_SESSION == null && $section != 'connexion-inscription'){
         header('Location: http://localhost/SAE3012/connexion-inscription' );

@@ -60,7 +60,7 @@
 
     function afficher_page_profil($utilisateur){
         global $twig;
-        print_r(get_messages_par_utilisateur($utilisateur['IdUser']));
+        // print_r(get_messages_par_utilisateur($utilisateur['IdUser']));
         echo $twig -> render('enfant-profil.twig.html',
         ["utilisateur"=> $utilisateur,
         "messages"=> get_messages_par_utilisateur($utilisateur['IdUser'])]);
@@ -121,11 +121,11 @@
     }
 
     function like_message($messageId, $userId){
-        print_r( "like_message called with messageId: $messageId, userId: $userId\n");
+        // print_r( "like_message called with messageId: $messageId, userId: $userId\n");
         insert_reaction_like($messageId, $userId);
     }
     function dislike_message($messageId, $userId){
-        print_r( "dislike_message called with messageId: $messageId, userId: $userId\n");
+        // print_r( "dislike_message called with messageId: $messageId, userId: $userId\n");
         insert_reaction_dislike($messageId, $userId);
     }
 
