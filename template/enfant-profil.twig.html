@@ -3,8 +3,6 @@
 
 {% block style %}
 <style>
-    /* ---------MOBILE-------- */
-
     h1 {
         font-size: 40px;
         margin-bottom: 30px;
@@ -17,6 +15,7 @@
     div {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 20px;
 
     }
 
@@ -24,10 +23,6 @@
         max-width: 32px;
         background-color: rgb(110, 203, 243);
         border-radius: 15px;
-    }
-
-    p {
-        margin-bottom: 20px;
     }
 
     .boutons {
@@ -41,6 +36,8 @@
         font-size: 17px;
         color: white;
     }
+
+
 
     /* ---------ORDINATEUR-------- */
     @media only screen and (min-width: 1024px) {
@@ -122,7 +119,7 @@
 
 {% block contenu %}
 <div>
-    <h2>@{{utilisateur.identifiant}}</h2>
+    <h2>{{utilisateur.identifiant}}</h2>
     <a href="/SAE3012/parametre">
         <img id="param" src="images/parametres.png" alt="parametre">
     </a>
@@ -130,8 +127,8 @@
 <p>{{utilisateur.biographie}}</p>
 
 <div class="boutons">
-    <button>Posts</button>
-    <button>Likes</button>
+    <button>Post</button>
+    <button>Like</button>
     <button>Commentaires</button>
 </div>
 
