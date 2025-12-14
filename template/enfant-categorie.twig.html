@@ -3,59 +3,103 @@
 
 {% block style %}
 <style>
-    header {
+    /* -----------MOBILE----------- */
+    h1 {
         background-color: rgb(110, 203, 243);
-        color : #212529;
+        color: #212529;
+        border-radius: 10px;
+        width: 90%;
+        float: right;
+        margin-right: 3%;
+        margin-bottom: 5%;
+        padding: 10px;
+
     }
 
-    h1 {
-        padding : 10px;
+    .filtres {
+        width: 270px;
+        margin: auto;
+        font-size: 18px;
+        margin-bottom: 8%;
     }
+
+    .filtres button,
+    select {
+        font-size: 13px;
+        padding: 2px;
+    }
+
+    .filtres button {
+        background-color: rgb(110, 203, 243);
+        border-radius: 4px;
+    }
+
+    .msg {
+        margin: auto;
+        width: 90%;
+        border: solid red;
+    }
+
+    .haut {
+        display :flex;
+        justify-content: space-between;
+    }
+
+    .haut p {
+        font-size : 11px;
+    }
+
+
+    /* -----------TABLETTE----------- */
+    /* -----------ORDINATEUR----------- */
 </style>
 
-{% endblock %} 
+{% endblock %}
 
 {% block header %}
- <h1>{{categorie.nom}}</h1>
- <h2>{{categorie.description}}</h2>
- <form action="/SAE3012/{{categorie.nom}}" method="post">
+<h1>{{categorie.nom}}</h1>
+<!-- <h2>{{categorie.description}}</h2> -->
+
+{% endblock %}
+
+
+{% block contenu %}
+<!-- <p>Liste des messages de la categorie {{categorie.nom}}</p> -->
+<form class="filtres" action="/SAE3012/{{categorie.nom}}" method="post">
     <label for="tri">Trier par :</label>
     <select name="tri" id="tri">
         <option>Plus récent</option>
         <option>Plus de Likes</option>
     </select>
-    <button type="submit">Trier</button>
- </form>
-{% endblock %} 
-
-
-{% block contenu %}
-<!-- <p>Liste des messages de la categorie {{categorie.nom}}</p> -->
+    <button type="submit">Appliquer</button>
+</form>
 {% for message in messages %}
-    <div class="msg">
-        <h2>{{ message.auteur }}</h2>
+<div class="msg">
+    <div class="haut">
+        <h2>@{{ message.auteur }}</h2>
         <p>{{ message.date }}</p>
-        {% if message.imageSrc %}
-            <img src="{{ message.imageSrc }}" alt="Message Image de {{ message.auteur }}"> 
-        {% endif %}
-        <p>{{ message.texte }}</p>
-        <div>
-            <form action="/SAE3012/commentaires" method="post">
-                <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
-                <button type="submit" class="commentBtn">commentaires <span>{{ message.nbrCom }}</span></button>
-            </form>
-            <form action="{{ categorie.nom }}" method="post">
-                <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
-                <input type="hidden" name="like" value="1">
-                <button type="submit" class="likeBtn">Like <span>{{ message.nbrLike }}</span></button>
-            </form>
-            <form action="{{ categorie.nom }}" method="post">
-                    <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
-                    <input type="hidden" name="dislike" value="2">
-                <button type="submit" class="dislikBtn">Dislike <span>{{ message.nbrDislike }}</span></button>
-            </form>
-        </div>
     </div>
+    {% if message.imageSrc %}
+    <img src="{{ message.imageSrc }}" alt="Message Image de {{ message.auteur }}">
+    {% endif %}
+    <p>{{ message.texte }}</p>
+    <div>
+        <form action="/SAE3012/commentaires" method="post">
+            <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
+            <button type="submit" class="commentBtn">commentaires <span>{{ message.nbrCom }}</span></button>
+        </form>
+        <form action="{{ categorie.nom }}" method="post">
+            <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
+            <input type="hidden" name="like" value="1">
+            <button type="submit" class="likeBtn">Like <span>{{ message.nbrLike }}</span></button>
+        </form>
+        <form action="{{ categorie.nom }}" method="post">
+            <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
+            <input type="hidden" name="dislike" value="2">
+            <button type="submit" class="dislikBtn">Dislike <span>{{ message.nbrDislike }}</span></button>
+        </form>
+    </div>
+</div>
 {% endfor %}
 
 {% endblock %}
