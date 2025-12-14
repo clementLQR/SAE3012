@@ -23,21 +23,31 @@
     textarea {
         height: 250px;
         border-radius: 10px;
+        resize: none;
     }
 
-    div {
+    .buttons {
         display:flex;
         justify-content:center;
         margin-top : 40px;
     }
-    
-    button {
 
+    .buttons button {
         font-size: 23px;
         padding: 10px;
         width: 40%;
         margin: auto;
         border-radius:8px;
+    }
+
+    .buttons a {
+        text-decoration: none;
+        width: 40%;
+    }
+
+    .buttons a button {
+        background-color: rgb(255, 255, 255);
+        width: 100%;
     }
 
     button:first-of-type{
@@ -61,9 +71,9 @@
 <form method="post" action="/SAE3012/biographie">
     <label for="biographie">Rédigez votre biographie : </label>
     <textarea id="biographie" name="biographie"></textarea>
-    <div>
+    <div class="buttons">
         <button type="submit">Enregistrer</button>
-        <button type="button" onclick="window.location.href='/SAE3012/parametre'">Annuler</button>
+        <a href="/SAE3012/parametre"><button type="button">Annuler</button></a>
     </div>
 </form>
 
