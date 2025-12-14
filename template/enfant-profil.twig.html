@@ -15,8 +15,10 @@
     div {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 20px;
+    }
 
+    p {
+        margin-bottom: 30px;
     }
 
     #param {
@@ -47,30 +49,16 @@
         }
 
         h2 {
-            font-size: 30px;
+            font-size: 40px;
         }
 
         #param {
             max-width: 37px;
-            background-color: rgb(110, 203, 243);
             border-radius: 18px;
         }
 
-        #param {
-            max-width: 32px;
-            background-color: rgb(110, 203, 243);
-            border-radius: 15px;
-        }
-
-        p {
-            margin-bottom: 30px;
-        }
-
         button {
-            border: none;
-            background-color: #212529;
             font-size: 25px;
-            color: white;
         }
     }
 
@@ -83,30 +71,22 @@
         }
 
         h2 {
-            font-size: 25px;
+            font-size: 35px;
+            margin-bottom : 5px;
         }
 
         #param {
             max-width: 37px;
-            background-color: rgb(110, 203, 243);
             border-radius: 18px;
         }
 
-        #param {
-            max-width: 30px;
-            background-color: rgb(110, 203, 243);
-            border-radius: 15px;
-        }
-
         p {
+            font-size : 20px;
             margin-bottom: 30px;
         }
 
         button {
-            border: none;
-            background-color: #212529;
-            font-size: 21px;
-            color: white;
+            font-size: 25px;
         }
     }
 </style>
@@ -119,7 +99,7 @@
 
 {% block contenu %}
 <div>
-    <h2>{{utilisateur.identifiant}}</h2>
+    <h2>@{{utilisateur.identifiant}}</h2>
     <a href="/SAE3012/parametre">
         <img id="param" src="images/parametres.png" alt="parametre">
     </a>
@@ -127,8 +107,8 @@
 <p>{{utilisateur.biographie}}</p>
 
 <div class="boutons">
-    <button>Post</button>
-    <button>Like</button>
+    <button>Posts</button>
+    <button>Likes</button>
     <button>Commentaires</button>
 </div>
 
