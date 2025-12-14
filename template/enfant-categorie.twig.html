@@ -31,7 +31,7 @@
         {% endif %}
         <p>{{ message.texte }}</p>
         <div>
-            <form action="{{ categorie.nom }}/" method="post">
+            <form action="/SAE3012/commentaires" method="post">
                 <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
                 <button type="submit" class="commentBtn">commentaires <span>{{ message.nbrCom }}</span></button>
             </form>

@@ -1,0 +1,39 @@
+{% extends 'parent-footer.twig.html' %}
+{% block title %}Commentaires{% endblock %}
+
+{% block style %}
+
+{% endblock %} 
+
+{% block header %}
+ <h1>Commentaires</h1>
+{% endblock %} 
+
+
+{% block contenu %}
+        <h2>{{ messages.auteur }}</h2>
+        <p>{{ messages.date }}</p>
+        {% if messages.imageSrc %}
+            <img src="{{ messages.imageSrc }}" alt="Message Image de {{ messages.auteur }}"> 
+        {% endif %}
+        <p>{{ messages.texte }}</p>
+
+        <hr>
+
+    {% for commentaire in commentaires %}
+        <div class="commentaire">
+            <h3>{{ utilisateurs[commentaire.IdUser - 1].identifiant }}</h3>
+            <p>{{ commentaire.date }}</p>
+            <p>{{ commentaire.texte }}</p>
+        </div>
+    {% endfor %}
+
+    <form action="/SAE3012/commentaires" method="post">
+        <input type="hidden" name="messageId" value="{{ messages.IdMsg }}">
+        <textarea name="texte" rows="4" cols="50" placeholder="Écrire un commentaire..."></textarea>
+        <button type="submit">Publier le commentaire</button>
+    </form>
+
+
+
+{% endblock %}

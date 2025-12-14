@@ -105,6 +105,26 @@
         return $messages;
     }
 
+    function get_messages_par_id($messageId){
+        global $mysqli;
+
+        $query = "
+            SELECT message.*, utilisateur.identifiant AS auteur
+            FROM message
+            JOIN utilisateur ON message.IdUser = utilisateur.IdUser
+            WHERE message.idMsg = $messageId
+        ";
+
+        $result = mysqli_query($mysqli, $query);
+
+        if (!$result) {
+            die("Erreur SQL : " . mysqli_error($mysqli));
+        }
+
+        $message = mysqli_fetch_assoc($result);
+        return $message;
+    }   
+
 
     /* publier */
 
@@ -215,9 +235,9 @@
     // réaction
 
 
-    function get_all_commentaire(){
+    function get_all_commentaire_par_message($messageId){
         global $mysqli;
-        $query = "SELECT * from commentaire";
+        $query = "SELECT * from commentaire WHERE IdMsg = $messageId";
         $result = mysqli_query($mysqli, $query);
         $commentaire = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $commentaire;
@@ -229,6 +249,24 @@
         $result = mysqli_query($mysqli, $query);
         $reaction = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $reaction;
+    }
+
+    function insert_commentaire($idMsg, $idUser, $texte) {
+        global $mysqli;
+        $query = "INSERT INTO commentaire (texte, dateCom, IdMsg, IdUser)
+            VALUES ('$texte', NOW(), $idMsg, $idUser)";
+        $result = mysqli_query($mysqli, $query);
+
+        if ($result) {
+            // Met à jour le nombre de commentaires dans la table message
+            $updateQuery = "UPDATE message SET nbrCom = nbrCom + 1 WHERE idMsg = $idMsg";
+            mysqli_query($mysqli, $updateQuery);
+
+            return true; // succès
+        } else {
+            return false; // échec
+        }
+        
     }
 
     function insert_reaction_like($messageId, $userId){

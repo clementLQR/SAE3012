@@ -41,10 +41,21 @@
         echo $twig -> render('enfant-categorie.twig.html', 
         ['categorie' => get_categorie($idCat),
         "messages" => get_messages_par_categorie($idCat),
-        "utilisateur" => get_all_utilisateur(),
-        "commentaires" => get_all_commentaire(),
-        "reactions" => get_all_reaction()
+        "utilisateur" => get_all_utilisateur()]);
+    }
+
+    function afficher_page_commentaire($messageId){
+        global $twig;
+        print_r('sdqsd q'.$messageId);
+        echo $twig -> render('enfant-commentaire.twig.html', 
+        ["commentaires" => get_all_commentaire_par_message($messageId),
+        "messages" => get_messages_par_id($messageId),
+        "utilisateurs" => get_all_utilisateur()
         ]);
+    }
+
+    function publier_commentaire($idMsg, $idUser, $texte) {
+        insert_commentaire($idMsg, $idUser, $texte);
     }
 
     function afficher_page_publier($utilisateur){

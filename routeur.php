@@ -12,15 +12,15 @@
     $section = $pathExplode[1] ?? null;  
     $action  = $pathExplode[2] ?? null; 
 
-    // echo '<br>';
-    // print_r($pathExplode);
-    // echo '<br>';
-    // print_r($_SESSION);
-    // echo '<br>';
-    // echo '<br>'.$section.'<br>';
-    // echo '<br>'.$action.'<br>';
-    // print_r($_POST);
-    // echo '<br>';
+    echo '<br>';
+    print_r($pathExplode);
+    echo '<br>';
+    print_r($_SESSION);
+    echo '<br>';
+    echo '<br>'.$section.'<br>';
+    echo '<br>'.$action.'<br>';
+    print_r($_POST);
+    echo '<br>';
 
     if ($_SESSION == null && $section != 'connexion-inscription'){
         header('Location: http://localhost/SAE3012/connexion-inscription' );
@@ -46,7 +46,29 @@
         
     }
 
-    else if ($section == 'jeux%20video'){
+    else if ($section == 'commentaires'){
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['messageId']) && isset($_POST['texte'])){
+            $idMsg = $_POST['messageId'];
+            $idUser = $_SESSION['utilisateur']['IdUser'];
+            $texte = $_POST['texte'];
+            publier_commentaire($idMsg, $idUser, $texte);
+            return afficher_page_commentaire($idMsg);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $messageId = $_POST['messageId'];
+            afficher_page_commentaire($messageId);        
+        }
+    
+        
+    }
+
+    else if ($section == 'commentaires'){
+
+    }
+
+    else if ($section == 'jeux%20video'){  
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $messageId = $_POST['messageId'];
