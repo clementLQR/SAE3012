@@ -4,7 +4,7 @@
 {% block style %}
 <style>
     h1 {
-        font-size: 40px;
+        font-size: 35px;
         margin-bottom: 40px;
     }
 
@@ -16,42 +16,80 @@
 
 
     label {
-        font-size: 20px;
-        margin-bottom: 10px;
+        font-size: 15px;
+        margin-bottom: 2%;
     }
 
     textarea {
         height: 30px;
         border-radius: 10px;
         resize: none;
+        margin-bottom: 15%;
     }
 
     .buttons {
-        display:flex;
-        justify-content:center;
-        margin-top : 40px;
+        display: flex;
+        width: 80%;
+        gap: 10%;
+        margin: auto;
     }
 
     .buttons button {
-        font-size: 23px;
+        font-size: 17px;
         padding: 10px;
-        width: 40%;
+        width: 50%;
         margin: auto;
-        border-radius:8px;
+        border-radius: 8px;
+        background-color: rgb(110, 203, 243);
     }
 
     .buttons a {
-        text-decoration: none;
-        width: 40%;
+        width: 50%;
+
     }
 
     .buttons a button {
-        background-color: rgb(255, 255, 255);
         width: 100%;
+        background-color: rgb(201, 203, 204);
+
     }
 
-    button:first-of-type{
-        background-color: rgb(110, 203, 243);
+    /* --------------TABLETTE------------ */
+    @media only screen and (min-width: 768px) {
+        h1 {
+            font-size: 40px;
+            margin-bottom: 10%;
+        }
+
+        label {
+            font-size: 25px;
+            margin-bottom: 2%;
+        }
+
+        .buttons button {
+            font-size: 25px;
+        }
+    }
+
+    /* -------------ORDINATEUR------------- */
+    @media only screen and (min-width: 1024px) {
+        h1 {
+            font-size: 45px;
+            margin-bottom: 5%;
+        }
+
+        label {
+            font-size: 25px;
+            margin-bottom: 2%;
+        }
+
+        .buttons button {
+            font-size: 25px;
+        }
+
+        textarea {
+            margin-bottom : 5%;
+        }
     }
     
 </style>

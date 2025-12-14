@@ -3,75 +3,121 @@
 
 {% block style %}
 <style>
+    /* --------MOBILE---------- */
     h1 {
-        font-size: 40px;
-        margin-bottom: 40px;
+        font-size: 35px;
+        margin-bottom: 10%;
 
     }
 
     .boutons {
         display: flex;
         justify-content: space-around;
-        margin-top: 50px;
-        margin-bottom: 50px;
-    }
-
-    .btn {
-        font-size: 30px;
-        background: linear-gradient(rgb(110, 203, 243), rgb(7, 101, 142));
-        /* background-color: rgb(110, 203, 243); */
-        display: flex;
-        padding: 20px 10px 20px 10px;
-        width: 50%;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .btn:active {
-        background-color: rgb(50, 122, 153);
     }
 
     form {
         display: flex;
         flex-direction: column;
-        font-size: 25px;
-        border: solid 2px rgba(235, 240, 242, 0.749);
+        font-size: 20px;
+        /* border: solid 2px rgba(235, 240, 242, 0.749); */
         border-radius: 20px;
         padding: 20px;
-        height: 600px;
+        height: 100%;
     }
 
     label {
-        margin-bottom : 10px;
+        margin-bottom: 3%;
     }
 
-    label:first-child {
-        margin-top : 8px;
-    }
-
-    input, select{
-        margin-bottom: 50px;
+    input,
+    select {
+        margin-bottom: 10%;
         font-size: 15px;
-        height : 30px;
-        padding : 5px;
-        border-radius : 5px;
+        height: 30px;
+        padding: 5px;
+        border-radius: 5px;
     }
 
     textarea {
         height: 120px;
-        border-radius : 5px;
+        border-radius: 8px;
         resize: none;
+        margin-bottom: 20%;
     }
 
     button {
-        font-size : 23px;
-        padding : 10px;
-        width : 200px;
+        font-size: 20px;
+        padding: 10px;
+        width: 180px;
         margin: auto;
         background-color: rgb(110, 203, 243);
-        border-radius : 10px;
+        border-radius: 10px;
     }
 
+    /* --------------TABLETTE------------ */
+    @media only screen and (min-width: 768px) {
+        h1 {
+            font-size: 40px;
+            margin-bottom: 7%;
+
+        }
+
+        form {
+            font-size: 25px;
+        }
+
+        label {
+            margin-bottom: 2%;
+        }
+
+        input,
+        select {
+            font-size: 18px;
+            height: 40px;
+            padding: 5px;
+        }
+
+        textarea {
+            margin-bottom: 20%;
+        }
+
+        button {
+            font-size: 25px;
+            width: 220px;
+        }
+    }
+
+    /* --------------ORDINATEUR------------ */
+    @media only screen and (min-width: 1024px) {
+        h1 {
+            font-size: 45px;
+            margin-bottom: 4%;
+
+        }
+
+        form {
+            font-size: 35px;
+        }
+
+        label {
+            margin-bottom: 2%;
+        }
+
+        input,select {
+            font-size: 20px;
+            height: 40px;
+            padding: 5px;
+        }
+
+        textarea {
+            margin-bottom: 10%;
+        }
+
+        button {
+            font-size: 30px;
+            width: 300px;
+        }
+    }
 </style>
 
 
@@ -102,21 +148,21 @@
     <button type="submit">Publier</button>
     </from>
 
-<script>
-    document.querySelector('input[name="image"]').addEventListener('change', function(event) {
-        const preview = document.getElementById('previewImage');
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                preview.src = e.target.result;
-                preview.style.display = 'block';
+    <script>
+        document.querySelector('input[name="image"]').addEventListener('change', function (event) {
+            const preview = document.getElementById('previewImage');
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
             }
-            reader.readAsDataURL(file);
-        } else {
-            preview.src = '#';
-            preview.style.display = 'none';
-        }
-    });
-</script>
+        });
+    </script>
     {% endblock %}

@@ -5,8 +5,8 @@
     /* ---------MOBILE-------- */
 
     h1 {
-        font-size: 40px;
-        margin-bottom: 40px;
+        font-size: 35px;
+        margin-bottom: 20%;
     }
 
     div {
@@ -30,12 +30,37 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
+        gap: 8px;        
+        background-color :rgba(198, 201, 205, 0.781);
+
     }
 
     button img {
         width: 25px;
+    }
 
+    /* ---------TABLETTE-------- */
+
+    @media only screen and (min-width: 768px) {
+        h1 {
+            font-size: 40px;
+            margin-bottom: 85px;
+        }
+
+        div {
+            gap: 75px;
+        }
+
+        button {
+            font-size: 25px;
+            height: 70px;
+            width: 400px;
+        }
+
+        button img {
+            width: 27px;
+
+        }
     }
 
     /* ---------ORDINATEUR-------- */
@@ -47,13 +72,16 @@
         }
 
         div {
-            gap: 90px;
-        }
+        display: flex;
+        flex-direction: row ;
+        justify-content: space-around;
+        gap: 70px;
+    }
 
         button {
-            font-size: 25px;
-            height: 70px;
-            width: 330px;
+            font-size: 28px;
+            height: 75px;
+            width: 350px;
         }
 
         button img {
@@ -62,29 +90,7 @@
         }
     }
 
-    /* ---------TABLETTE-------- */
-
-    @media only screen and (min-width: 768px) {
-        h1 {
-            font-size: 50px;
-            margin-bottom: 85px;
-        }
-
-        div {
-            gap: 75px;
-        }
-
-        button {
-            font-size: 22px;
-            height: 65px;
-            width: 310px;
-        }
-
-        button img {
-            width: 27px;
-
-        }
-    }
+    
     
 </style>
 

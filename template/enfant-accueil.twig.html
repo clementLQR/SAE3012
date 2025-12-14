@@ -4,8 +4,8 @@
 <style>
     /* ---------MOBILE-------- */
     h1 {
-        font-size: 40px;
-        margin-bottom: 30px;
+        font-size: 35px;
+        margin-bottom: 15%;
     }
 
     a {
@@ -18,61 +18,59 @@
     }
 
     button {
-        font-size: 17px;
-        margin-bottom: 30px;
-        height: 60px;
+        font-size: 15px;
+        margin-bottom: 10%;
+        height: 50px;
         border-radius: 10px;
         background-color: rgb(158, 213, 237);
+    }
+
+    /* ---------TABLETTE-------- */
+    @media only screen and (min-width: 768px) {
+
+        
+        h1 {
+            margin-bottom: 15%;
+            font-size: 40px;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            row-gap : 10%;
+        }
+
+        a {
+            width: 85%;
+        }
+
+        button {
+            height : 60px;
+            font-size: 20px;
+        }
     }
 
     /* ---------ORDINATEUR-------- */
 
     @media only screen and (min-width: 1024px) {
-
         h1 {
-            margin-bottom: 50px;
-            font-size: 60px;
-        }
-
-        main {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            margin-bottom: 5%;
             font-size: 40px;
         }
 
-        a {
-            width: 330px;
-        }
-
-        button {
-            height : 110px;
-            font-size: 50px;
-        }
-    }
-
-    /* ---------TABLETTE-------- */
-    @media only screen and (min-width: 768px) {
-        
-        
-        h1 {
-            margin-bottom: 50px;
-            font-size: 60px;
-        }
-
         main {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap : 30px;
+            row-gap : 1%;
         }
 
         a {
-            width: 350px;
+            width: 80%;
         }
 
         button {
+            height : 70px;
             font-size: 20px;
-            height: 80px;
-            padding:5px;
         }
     }
     

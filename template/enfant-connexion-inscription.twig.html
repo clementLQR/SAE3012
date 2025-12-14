@@ -3,27 +3,30 @@
 {% block title %}Connexion{% endblock %}
 {% block style %}
 <style>
+    /* ---------MOBILE---------- */
     h1 {
-        font-size : 40px;
-        padding-top : 20px;
-    
+        font-size: 35px;
+        padding-top: 20px;
+
     }
 
     .boutons {
         display: flex;
-        justify-content : space-around;
-        margin-top : 50px;
-        margin-bottom : 50px;
+        justify-content: space-around;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        gap: 8%;
     }
 
-    
+
     .btn {
-        font-size:30px;
-        background: linear-gradient(rgb(110, 203, 243),rgb(7, 101, 142));
-        /* background-color: rgb(110, 203, 243); */
+        font-size: 20px;
+        background-color: rgb(110, 203, 243);
         display: flex;
-        padding : 20px 10px 20px 10px;
-        width : 50%;
+        padding: 15px 10px 15px 10px;
+        width: 50%;
+        border-radius: 8px;
+        ;
         justify-content: center;
         text-align: center;
     }
@@ -33,38 +36,89 @@
     }
 
     form {
-        display : flex;
-        flex-direction : column;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
-        font-size : 25px;
-        margin : 20px;
+        font-size: 20px;
+        margin: 20px;
     }
 
     form label {
-        margin-bottom : 15px;
+        margin-bottom: 15px;
     }
 
     form input {
-        height : 35px;
-        margin-bottom : 40px;
+        height: 35px;
+        margin-bottom: 15%;
+        border-radius: 5px;
     }
 
     form button {
-        margin-top : 25px;
-        font-size : 25px;
-        padding : 10px;
-        width : 200px;
+        margin-top: 25px;
+        font-size: 20px;
+        padding: 10px;
+        width: 200px;
         margin: auto;
+        border-radius: 8px;
     }
 
-    footer {
+    /* footer {
         display : none;
+    } */
+
+    /* --------------TABLETTE------------ */
+    @media only screen and (min-width: 768px) {
+        h1 {
+            font-size: 40px;
+
+        }
+
+        .btn {
+            font-size: 25px;
+        }
+
+
+        form {
+            font-size: 20px;
+        }
+
+
+        form button {
+            font-size: 25px;
+            width: 250px;
+
+        }
+
+
     }
 
+    /* -------------ORDINATEUR------------- */
+    @media only screen and (min-width: 1024px) {
+       h1 {
+            font-size: 45px;
+
+        }
+
+        .btn {
+            font-size: 25px;
+        }
 
 
+        form {
+            font-size: 20px;
+        }
 
 
+        form button {
+            font-size: 25px;
+            width: 250px;
+
+        }
+
+        form input {
+        margin-bottom: 8%;
+    }
+    }
 </style>
 {% endblock %}
 
