@@ -187,6 +187,85 @@
         return $reaction;
     }
 
+    function insert_reaction_like($messageId, $userId){
+        global $mysqli;
+
+        // Vérifie si l'utilisateur a déjà liké le message
+        $queryCheck = "SELECT * FROM reaction WHERE IdMsg = $messageId AND IdUser = $userId AND IdType = 1 LIMIT 1";
+        $resultCheck = mysqli_query($mysqli, $queryCheck);
+
+        // Si oui, on supprime le like
+        if (mysqli_fetch_assoc($resultCheck)) {
+            $queryDelete = "DELETE FROM reaction WHERE IdMsg = $messageId AND IdUser = $userId AND IdType = 1";
+            mysqli_query($mysqli, $queryDelete);
+            $updateQuery = "UPDATE message SET nbrLike = nbrLike - 1 WHERE idMsg = $messageId";
+            mysqli_query($mysqli, $updateQuery);
+            return true; // succès
+        }
+
+        // Vérifie si l'utilisateur a déjà disliké le message
+        $queryCheckDislike = "SELECT * FROM reaction WHERE IdMsg = $messageId AND IdUser = $userId AND IdType = 2 LIMIT 1";
+        $resultCheckDislike = mysqli_query($mysqli, $queryCheckDislike);
+        // Si oui, on supprime le dislike
+        if (mysqli_fetch_assoc($resultCheckDislike)) {
+            $queryDeleteDislike = "DELETE FROM reaction WHERE IdMsg = $messageId AND IdUser = $userId AND IdType = 2";
+            mysqli_query($mysqli, $queryDeleteDislike);
+            $updateQueryDislike = "UPDATE message SET nbrDislike = nbrDislike - 1 WHERE idMsg = $messageId";
+            mysqli_query($mysqli, $updateQueryDislike);
+        }
+
+        // Insère le like
+        $query = "INSERT INTO reaction (IdMsg, IdUser, IdType)
+            VALUES ($messageId, $userId, 1)";
+        $result = mysqli_query($mysqli, $query);
+
+        if ($result) {
+            // Met à jour le nombre de likes dans la table message
+            $updateQuery = "UPDATE message SET nbrLike = nbrLike + 1 WHERE idMsg = $messageId";
+            mysqli_query($mysqli, $updateQuery);
+
+            return true; // succès
+        } else {
+            return false; // échec
+        }
+    }
+    
+    function insert_reaction_dislike($messageId, $userId){
+        global $mysqli;
+        // Vérifie si l'utilisateur a déjà disliké le message
+        $queryCheck = "SELECT * FROM reaction WHERE IdMsg = $messageId AND IdUser = $userId AND IdType = 2 LIMIT 1";
+        $resultCheck = mysqli_query($mysqli, $queryCheck);
+        // Si oui, on supprime le dislike
+        if (mysqli_fetch_assoc($resultCheck)) {
+            $queryDelete = "DELETE FROM reaction WHERE IdMsg = $messageId AND IdUser = $userId AND IdType = 2";
+            mysqli_query($mysqli, $queryDelete);
+            $updateQuery = "UPDATE message SET nbrDislike = nbrDislike - 1 WHERE idMsg = $messageId";
+            mysqli_query($mysqli, $updateQuery);
+            return true; // succès
+        }
+        // Vérifie si l'utilisateur a déjà liké le message
+        $queryCheckLike = "SELECT * FROM reaction WHERE IdMsg = $messageId AND IdUser = $userId AND IdType = 1 LIMIT 1";
+        $resultCheckLike = mysqli_query($mysqli, $queryCheckLike);
+        // Si oui, on supprime le like
+        if (mysqli_fetch_assoc($resultCheckLike)) {
+            $queryDeleteLike = "DELETE FROM reaction WHERE IdMsg = $messageId AND IdUser = $userId AND IdType = 1";
+            mysqli_query($mysqli, $queryDeleteLike);
+            $updateQueryLike = "UPDATE message SET nbrLike = nbrLike - 1 WHERE idMsg = $messageId";
+            mysqli_query($mysqli, $updateQueryLike);
+        }
+        // Insère le dislike
+        $query = "INSERT INTO reaction (IdMsg, IdUser, IdType)
+            VALUES ($messageId, $userId, 2)";
+        $result = mysqli_query($mysqli, $query);
+        if ($result) {
+            // Met à jour le nombre de dislikes dans la table message
+            $updateQuery = "UPDATE message SET nbrDislike = nbrDislike + 1 WHERE idMsg = $messageId";
+            mysqli_query($mysqli, $updateQuery);
+            return true; // succès
+        } else {
+            return false; // échec
+        }
+    }
     
 ?>
 

@@ -12,13 +12,15 @@
     $section = $pathExplode[1] ?? null;  
     $action  = $pathExplode[2] ?? null; 
 
-    // echo '<br>';
-    // print_r($pathExplode);
-    // echo '<br>';
-    // print_r($_SESSION);
-    // echo '<br>';
-    // echo '<br>'.$section.'<br>';
-    // echo '<br>'.$action.'<br>';
+    echo '<br>';
+    print_r($pathExplode);
+    echo '<br>';
+    print_r($_SESSION);
+    echo '<br>';
+    echo '<br>'.$section.'<br>';
+    echo '<br>'.$action.'<br>';
+    print_r($_POST);
+    echo '<br>';
 
     if ($_SESSION == null && $section != 'connexion-inscription'){
         header('Location: http://localhost/SAE3012/connexion-inscription' );
@@ -45,38 +47,124 @@
     }
 
     else if ($section == 'jeux%20video'){
-        return afficher_page_categorie(1);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $messageId = $_POST['messageId'];
+            $userId = $_SESSION['utilisateur']['IdUser'];
+            if (isset($_POST['like'])){
+                like_message($messageId, $userId);
+            }
+            else if (isset($_POST['dislike'])){
+                dislike_message($messageId, $userId);
+            }
+        }
+        afficher_page_categorie(1);
     }
 
     else if ($section == 'musique'){
-        return afficher_page_categorie(2);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $messageId = $_POST['messageId'];
+            $userId = $_SESSION['utilisateur']['IdUser'];
+            if (isset($_POST['like'])){
+                like_message($messageId, $userId);
+            }
+            else if (isset($_POST['dislike'])){
+                dislike_message($messageId, $userId);
+            }
+        }
+        afficher_page_categorie(2);
     }
 
-    else if ($section == 'film'){
-        return afficher_page_categorie(3);
+    else if ($section == 'films'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $messageId = $_POST['messageId'];
+            $userId = $_SESSION['utilisateur']['IdUser'];
+            if (isset($_POST['like'])){
+                like_message($messageId, $userId);
+            }
+            else if (isset($_POST['dislike'])){
+                dislike_message($messageId, $userId);
+            }
+        }
+        afficher_page_categorie(3);
     }
 
     else if ($section == 'livres'){
-        return afficher_page_categorie(4);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $messageId = $_POST['messageId'];
+            $userId = $_SESSION['utilisateur']['IdUser'];
+            if (isset($_POST['like'])){
+                like_message($messageId, $userId);
+            }
+            else if (isset($_POST['dislike'])){
+                dislike_message($messageId, $userId);
+            }
+        }
+        afficher_page_categorie(4);
     }
 
     else if ($section == 'sport'){
-        return afficher_page_categorie(5);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $messageId = $_POST['messageId'];
+            $userId = $_SESSION['utilisateur']['IdUser'];
+            if (isset($_POST['like'])){
+                like_message($messageId, $userId);
+            }
+            else if (isset($_POST['dislike'])){
+                dislike_message($messageId, $userId);
+            }
+        }
+        afficher_page_categorie(5);
     }
 
     else if ($section == 'peinture%20et%20dessin'){
-        return afficher_page_categorie(6);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $messageId = $_POST['messageId'];
+            $userId = $_SESSION['utilisateur']['IdUser'];
+            if (isset($_POST['like'])){
+                like_message($messageId, $userId);
+            }
+            else if (isset($_POST['dislike'])){
+                dislike_message($messageId, $userId);
+            }
+        }
+        afficher_page_categorie(6);
     }
 
     else if ($section == 'photographie'){
-        return afficher_page_categorie(7);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $messageId = $_POST['messageId'];
+            $userId = $_SESSION['utilisateur']['IdUser'];
+            if (isset($_POST['like'])){
+                like_message($messageId, $userId);
+            }
+            else if (isset($_POST['dislike'])){
+                dislike_message($messageId, $userId);
+            }
+        }
+        afficher_page_categorie(7);
     }
 
     else if ($section == 'series'){
-        return afficher_page_categorie(8);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $messageId = $_POST['messageId'];
+            $userId = $_SESSION['utilisateur']['IdUser'];
+            if (isset($_POST['like'])){
+                like_message($messageId, $userId);
+            }
+            else if (isset($_POST['dislike'])){
+                dislike_message($messageId, $userId);
+            }
+        }
+        afficher_page_categorie(8);
     }
-
-
 
     else if ($section == 'publier'){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){

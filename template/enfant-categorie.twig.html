@@ -31,42 +31,23 @@
         {% endif %}
         <p>{{ message.texte }}</p>
         <div>
-            <button type="button">commentaires</button>
-            <p>{{ message.nbrCom }}</p>
-            <button class="likeBtn" data-id="{{ message.IdMsg }}">Like <span>{{ message.nbrLike }}</span></button>
-            <button class="dislikBtn" data-id="{{ message.IdMsg }}">Dislike <span>{{ message.nbrDislike }}</span></button>
+            <form action="{{ categorie.nom }}/" method="post">
+                <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
+                <button type="submit" class="commentBtn">commentaires <span>{{ message.nbrCom }}</span></button>
+            </form>
+            <form action="{{ categorie.nom }}" method="post">
+                <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
+                <input type="hidden" name="like" value="1">
+                <button type="submit" class="likeBtn">Like <span>{{ message.nbrLike }}</span></button>
+            </form>
+            <form action="{{ categorie.nom }}" method="post">
+                    <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
+                    <input type="hidden" name="dislike" value="2">
+                <button type="submit" class="dislikBtn">Dislike <span>{{ message.nbrDislike }}</span></button>
+            </form>
         </div>
     </div>
 {% endfor %}
-
-<script>
-    document.querySelectorAll('.likeBtn').forEach(button => {
-        button.addEventListener('click', () => {
-            const messageId = button.id;
-            fetch(`../reaction`, {
-                method: 'POST'
-            })
-            .then(reactions => reactions.json())
-            .then(data => {
-                button.querySelector('span').textContent = data.nbrLike;
-            });
-        });
-    });
-
-    document.querySelectorAll('.dislikeBtn').forEach(button => {
-        button.addEventListener('click', () => {
-            const messageId = button.id;
-            fetch(`../reaction`, {
-                method: 'POST'
-            })
-            .then(reactions => reactions.json())
-            .then(data => {
-                button.querySelector('span').textContent = data.nbrDislike;
-            });
-        });
-    });
-</script>
-
 
 
 {% endblock %}

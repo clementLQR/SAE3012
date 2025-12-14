@@ -114,6 +114,15 @@
         ['option' => $option]);
     }
 
+    function like_message($messageId, $userId){
+        print_r( "like_message called with messageId: $messageId, userId: $userId\n");
+        insert_reaction_like($messageId, $userId);
+    }
+    function dislike_message($messageId, $userId){
+        print_r( "dislike_message called with messageId: $messageId, userId: $userId\n");
+        insert_reaction_dislike($messageId, $userId);
+    }
+
 
 // insert_message('test', 1, 1, 'test de texte');
 ?>
