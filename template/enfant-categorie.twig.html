@@ -17,6 +17,15 @@
 
 {% block header %}
  <h1>{{categorie.nom}}</h1>
+ <h2>{{categorie.description}}</h2>
+ <form action="/SAE3012/{{categorie.nom}}" method="post">
+    <label for="tri">Trier par :</label>
+    <select name="tri" id="tri">
+        <option>Plus récent</option>
+        <option>Plus de Likes</option>
+    </select>
+    <button type="submit">Trier</button>
+ </form>
 {% endblock %} 
 
 
@@ -48,6 +57,5 @@
         </div>
     </div>
 {% endfor %}
-
 
 {% endblock %}

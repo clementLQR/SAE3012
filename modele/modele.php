@@ -84,6 +84,48 @@
         return $messages;
     }
 
+    function get_messages_par_categorie_trier_par_date($idCat){
+        global $mysqli;
+
+        $query = "
+            SELECT message.*, utilisateur.identifiant AS auteur
+            FROM message
+            JOIN utilisateur ON message.IdUser = utilisateur.IdUser
+            WHERE message.IdCat = $idCat
+            ORDER BY message.date DESC
+        ";
+
+        $result = mysqli_query($mysqli, $query);
+
+        if (!$result) {
+            die("Erreur SQL : " . mysqli_error($mysqli));
+        }
+
+        $messages = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $messages;
+    }
+
+    function get_messages_par_categorie_trier_par_like($idCat){
+        global $mysqli;
+
+        $query = "
+            SELECT message.*, utilisateur.identifiant AS auteur
+            FROM message
+            JOIN utilisateur ON message.IdUser = utilisateur.IdUser
+            WHERE message.IdCat = $idCat
+            ORDER BY message.nbrLike DESC
+        ";
+
+        $result = mysqli_query($mysqli, $query);
+
+        if (!$result) {
+            die("Erreur SQL : " . mysqli_error($mysqli));
+        }
+
+        $messages = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $messages;
+    }
+
     function get_messages_par_utilisateur($idUser){
         global $mysqli;
 

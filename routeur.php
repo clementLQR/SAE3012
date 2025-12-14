@@ -12,15 +12,15 @@
     $section = $pathExplode[1] ?? null;  
     $action  = $pathExplode[2] ?? null; 
 
-    echo '<br>';
-    print_r($pathExplode);
-    echo '<br>';
-    print_r($_SESSION);
-    echo '<br>';
-    echo '<br>'.$section.'<br>';
-    echo '<br>'.$action.'<br>';
-    print_r($_POST);
-    echo '<br>';
+    // echo '<br>';
+    // print_r($pathExplode);
+    // echo '<br>';
+    // print_r($_SESSION);
+    // echo '<br>';
+    // echo '<br>'.$section.'<br>';
+    // echo '<br>'.$action.'<br>';
+    // print_r($_POST);
+    // echo '<br>';
 
     if ($_SESSION == null && $section != 'connexion-inscription'){
         header('Location: http://localhost/SAE3012/connexion-inscription' );
@@ -69,7 +69,15 @@
     }
 
     else if ($section == 'jeux%20video'){  
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
+            return afficher_page_categorie_trier_par_date(1);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
+            return afficher_page_categorie_trier_par_likes(1);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $messageId = $_POST['messageId'];
             $userId = $_SESSION['utilisateur']['IdUser'];
@@ -84,7 +92,15 @@
     }
 
     else if ($section == 'musique'){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
+            return afficher_page_categorie_trier_par_date(2);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
+            return afficher_page_categorie_trier_par_likes(2);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $messageId = $_POST['messageId'];
             $userId = $_SESSION['utilisateur']['IdUser'];
@@ -99,7 +115,16 @@
     }
 
     else if ($section == 'films'){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
+            return afficher_page_categorie_trier_par_date(3);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
+            return afficher_page_categorie_trier_par_likes(3);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $messageId = $_POST['messageId'];
             $userId = $_SESSION['utilisateur']['IdUser'];
@@ -114,7 +139,15 @@
     }
 
     else if ($section == 'livres'){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
+            return afficher_page_categorie_trier_par_date(4);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
+            return afficher_page_categorie_trier_par_likes(4);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $messageId = $_POST['messageId'];
             $userId = $_SESSION['utilisateur']['IdUser'];
@@ -129,7 +162,15 @@
     }
 
     else if ($section == 'sport'){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
+            return afficher_page_categorie_trier_par_date(5);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
+            return afficher_page_categorie_trier_par_likes(5);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $messageId = $_POST['messageId'];
             $userId = $_SESSION['utilisateur']['IdUser'];
@@ -144,7 +185,15 @@
     }
 
     else if ($section == 'peinture%20et%20dessin'){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
+            return afficher_page_categorie_trier_par_date(6);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
+            return afficher_page_categorie_trier_par_likes(6);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $messageId = $_POST['messageId'];
             $userId = $_SESSION['utilisateur']['IdUser'];
@@ -159,7 +208,15 @@
     }
 
     else if ($section == 'photographie'){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
+            return afficher_page_categorie_trier_par_date(7);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
+            return afficher_page_categorie_trier_par_likes(7);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $messageId = $_POST['messageId'];
             $userId = $_SESSION['utilisateur']['IdUser'];
@@ -174,7 +231,15 @@
     }
 
     else if ($section == 'series'){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
+            return afficher_page_categorie_trier_par_date(8);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
+            return afficher_page_categorie_trier_par_likes(8);
+        }
+
+        else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $messageId = $_POST['messageId'];
             $userId = $_SESSION['utilisateur']['IdUser'];
