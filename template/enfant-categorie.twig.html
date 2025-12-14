@@ -1,6 +1,19 @@
 {% extends 'parent-footer.twig.html' %}
 {% block title %}Categorie{% endblock %}
 
+{% block style %}
+<style>
+    header {
+        background-color: rgb(110, 203, 243);
+        color : #212529;
+    }
+
+    h1 {
+        padding : 10px;
+    }
+</style>
+
+{% endblock %} 
 
 {% block header %}
  <h1>{{categorie.nom}}</h1>
@@ -8,9 +21,9 @@
 
 
 {% block contenu %}
-<p>Liste des messages de la categorie {{categorie.nom}}</p>
+<!-- <p>Liste des messages de la categorie {{categorie.nom}}</p> -->
 {% for message in messages %}
-    <div>
+    <div class="msg">
         <h2>{{ message.auteur }}</h2>
         <p>{{ message.date }}</p>
         {% if message.imageSrc %}
@@ -18,7 +31,7 @@
         {% endif %}
         <p>{{ message.texte }}</p>
         <div>
-            <button type="button">commentaire</button>
+            <button type="button">commentaires</button>
             <p>{{ message.nbrCom }}</p>
             <button class="likeBtn" data-id="{{ message.IdMsg }}">Like <span>{{ message.nbrLike }}</span></button>
             <button class="dislikBtn" data-id="{{ message.IdMsg }}">Dislike <span>{{ message.nbrDislike }}</span></button>

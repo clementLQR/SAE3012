@@ -16,26 +16,37 @@
 
 
     label {
-        font-size: 18px;
+        font-size: 20px;
         margin-bottom: 10px;
     }
 
-    input {
+    textarea {
         height: 250px;
         border-radius: 10px;
     }
 
+    div {
+        display:flex;
+        justify-content:center;
+        margin-top : 40px;
+    }
+    
     button {
 
         font-size: 23px;
         padding: 10px;
         width: 40%;
         margin: auto;
+        border-radius:8px;
     }
 
-    div {
-       
+    button:first-of-type{
+        background-color: rgb(110, 203, 243);
     }
+
+    
+
+    
 </style>
 
 {% endblock %}
@@ -47,12 +58,12 @@
 
 {% block contenu %}
 
-<form method="post" action="/SAE3012/parametre/biographie">
+<form method="post" action="/SAE3012/biographie">
     <label for="biographie">Rédigez votre biographie : </label>
     <textarea id="biographie" name="biographie"></textarea>
     <div>
         <button type="submit">Enregistrer</button>
-        <button href="http://localhost/SAE3012/parametre">Annuler</button>
+        <button type="button" onclick="window.location.href='/SAE3012/parametre'">Annuler</button>
     </div>
 </form>
 

@@ -2,6 +2,8 @@
 {% block title %}Paramètres{% endblock %}
 {% block style %}
 <style>
+    /* ---------MOBILE-------- */
+
     h1 {
         font-size: 40px;
         margin-bottom: 40px;
@@ -11,13 +13,13 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 70px;
     }
 
 
     button {
         background-color: rgb(110, 203, 243);
         font-size: 18px;
-        margin-bottom: 30px;
         height: 60px;
         border-radius: 10px;
         width: 300px;
@@ -28,13 +30,62 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap : 8px;
+        gap: 8px;
     }
 
     button img {
         width: 25px;
 
     }
+
+    /* ---------ORDINATEUR-------- */
+
+    @media only screen and (min-width: 1024px) {
+        h1 {
+            font-size: 60px;
+            margin-bottom: 100px;
+        }
+
+        div {
+            gap: 90px;
+        }
+
+        button {
+            font-size: 25px;
+            height: 70px;
+            width: 330px;
+        }
+
+        button img {
+            width: 30px;
+
+        }
+    }
+
+    /* ---------TABLETTE-------- */
+
+    @media only screen and (min-width: 768px) {
+        h1 {
+            font-size: 50px;
+            margin-bottom: 85px;
+        }
+
+        div {
+            gap: 75px;
+        }
+
+        button {
+            font-size: 22px;
+            height: 65px;
+            width: 310px;
+        }
+
+        button img {
+            width: 27px;
+
+        }
+    }
+    
 </style>
 
 {% endblock %}

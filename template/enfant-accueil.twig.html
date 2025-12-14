@@ -2,6 +2,7 @@
 {% block title %}Accueil{% endblock %}
 {% block style %}
 <style>
+    /* ---------MOBILE-------- */
     h1 {
         font-size: 40px;
         margin-bottom: 30px;
@@ -22,6 +23,57 @@
         height: 60px;
         border-radius: 10px;
         background-color: rgb(158, 213, 237);
+    }
+
+    /* ---------ORDINATEUR-------- */
+
+    @media only screen and (min-width: 1024px) {
+
+        h1 {
+            margin-bottom: 50px;
+            font-size: 60px;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            font-size: 40px;
+        }
+
+        a {
+            width: 330px;
+        }
+
+        button {
+            height : 110px;
+            font-size: 50px;
+        }
+    }
+
+    /* ---------TABLETTE-------- */
+    @media only screen and (min-width: 768px) {
+        
+        
+        h1 {
+            margin-bottom: 50px;
+            font-size: 60px;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap : 30px;
+        }
+
+        a {
+            width: 350px;
+        }
+
+        button {
+            font-size: 20px;
+            height: 80px;
+            padding:5px;
+        }
     }
     
 </style>

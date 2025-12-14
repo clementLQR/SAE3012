@@ -3,86 +3,137 @@
 
 {% block style %}
 <style>
-    a {
-        text-decoration: none;
-    }
-    
-    p {
-        margin-top: 20px;
-        font-size: 18px;
+    /* ---------MOBILE-------- */
+
+    h1 {
+        font-size: 40px;
+        margin-bottom: 30px;
     }
 
-    button {
-        width: 250px;
-        padding: 10px;
-        font-size: 16px;
-        background: linear-gradient(rgb(110, 203, 243),rgb(7, 101, 142));
-        color: white;
-        border: none;
-        cursor: pointer;
+    h2 {
+        font-size: 25px;
+    }
+
+    div {
         display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    button:hover {
-        background: linear-gradient(rgb(49, 143, 183),rgb(10, 69, 95));
-    }
-
-    img {
-        width: 20px;
-        height: 20px;
-        vertical-align: middle;
-        margin-right: 10px;
-    }
-
-    .profil-header {
-        display: flex;
-        align-items: center;
         justify-content: space-between;
 
     }
 
-    .profil{
-        width: 75%;
-        margin: auto;
+    #param {
+        max-width: 32px;
+        background-color: rgb(110, 203, 243);
+        border-radius: 15px;
     }
 
-    .post-like-comment {
+    p {
+        margin-bottom: 20px;
+    }
+
+    .boutons {
         display: flex;
-        margin-top: 30px;
-        width: 100%;
+        justify-content: space-evenly;
     }
 
-    .post-like-comment button {
-        flex: 1;
+    button {
+        border: none;
+        background-color: #212529;
+        font-size: 17px;
+        color: white;
     }
 
+    /* ---------ORDINATEUR-------- */
+    @media only screen and (min-width: 1024px) {
+
+        h1 {
+            font-size: 60px;
+        }
+
+        h2 {
+            font-size: 30px;
+        }
+
+        #param {
+            max-width: 37px;
+            background-color: rgb(110, 203, 243);
+            border-radius: 18px;
+        }
+
+        #param {
+            max-width: 32px;
+            background-color: rgb(110, 203, 243);
+            border-radius: 15px;
+        }
+
+        p {
+            margin-bottom: 30px;
+        }
+
+        button {
+            border: none;
+            background-color: #212529;
+            font-size: 25px;
+            color: white;
+        }
+    }
+
+    /* ---------TABLETTE-------- */
+
+    @media only screen and (min-width: 768px) {
+
+        h1 {
+            font-size: 50px;
+        }
+
+        h2 {
+            font-size: 25px;
+        }
+
+        #param {
+            max-width: 37px;
+            background-color: rgb(110, 203, 243);
+            border-radius: 18px;
+        }
+
+        #param {
+            max-width: 30px;
+            background-color: rgb(110, 203, 243);
+            border-radius: 15px;
+        }
+
+        p {
+            margin-bottom: 30px;
+        }
+
+        button {
+            border: none;
+            background-color: #212529;
+            font-size: 21px;
+            color: white;
+        }
+    }
 </style>
-{% endblock %} 
+{% endblock %}
 
 {% block header %}
-    <h1>Profil</h1>
-{% endblock %} 
+<h1>Profil</h1>
+{% endblock %}
 
 
 {% block contenu %}
-<div class="profil">
-    <div class="profil-header">
-        <h2>{{utilisateur.identifiant}}</h2>
-        <a href="/SAE3012/parametre"><button>Paramètres<img src="./images/parametres.png" alt="parametre"></button></a>
-    </div>
-        
-    <p>{{utilisateur.biographie}}</p>
-
-    <div class="post-like-comment">
-
-        <button>Post</button>
-
-        <button>Like</button>
-
-        <button>Commantaires</button>
-    </div>
-
+<div>
+    <h2>@{{utilisateur.identifiant}}</h2>
+    <a href="/SAE3012/parametre">
+        <img id="param" src="images/parametres.png" alt="parametre">
+    </a>
 </div>
+<p>{{utilisateur.biographie}}</p>
+
+<div class="boutons">
+    <button>Posts</button>
+    <button>Likes</button>
+    <button>Commentaires</button>
+</div>
+
+
 {% endblock %}

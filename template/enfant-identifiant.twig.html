@@ -1,16 +1,64 @@
 {% extends 'parent-footer.twig.html' %}
-{% block title %}Publier{% endblock %}
+{% block title %}Identifiant{% endblock %}
+
+{% block style %}
+<style>
+    h1 {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+
+    label {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    textarea {
+        height: 30px;
+        border-radius: 10px;
+    }
+
+    div {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    button {
+
+        font-size: 23px;
+        padding: 10px;
+        width: 40%;
+        margin: auto;
+        border-radius: 8px;
+    }
+
+    button:first-of-type {
+        background-color: rgb(110, 203, 243);
+    }
+</style>
+{% endblock %}
 
 
 {% block header %}
-<h1>Changer de pseudo</h1>
-{% endblock %} 
+<h1>Changer d'identifiant</h1>
+{% endblock %}
 
 
 {% block contenu %}
-    <form method="post" action="/SAE3012/parametre/identifiant">
-        <label for="identifiant">Identifiant</label>
-        <input type="text" id="identifiant" name="identifiant">
-        <button type="submit">Modifier</button>
-    </form>
+<form method="post" action="/SAE3012/identifiant">
+    <label for="identifiant">Ecrivez votre nouvel identifiant :</label>
+    <textarea id="identifiant" name="identifiant"></textarea>
+    <div>
+        <button type="submit">Enregistrer</button>
+        <button type="button" onclick="window.location.href='/SAE3012/parametre'">Annuler</button>
+    </div>
+</form>
 {% endblock %}
