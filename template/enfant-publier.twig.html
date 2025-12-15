@@ -19,7 +19,6 @@
         display: flex;
         flex-direction: column;
         font-size: 20px;
-        /* border: solid 2px rgba(235, 240, 242, 0.749); */
         border-radius: 20px;
         padding: 20px;
         height: 100%;
@@ -132,10 +131,6 @@
         }
     }
 </style>
-
-
-</style>
-
 {% endblock %}
 
 {% block header %}
@@ -145,9 +140,12 @@
 
 {% block contenu %}
 <form method="post" action="/SAE3012/publier" enctype="multipart/form-data" class="formPublier">
-    <label for="image"><strong>Image</strong></label>
-    <input type="file" name="image" accept="image/*">
-    <img id="previewImage" src="#" alt="Aperçu de l'image" style="display:none; max-width: 200px; margin-top: 10px;">
+    <div>
+        <label for="image"><strong>Image</strong></label>
+        <input type="file" name="image" accept="image/*">
+        <img id="previewImage" src="#" alt="Aperçu de l'image"
+            style="display:none; max-width: 200px; margin-top: 10px;">
+    </div>
     <label for="idCat"><strong>Catégorie *</strong></label>
     <select name="idCat" id="idCat" required>
         <option value="">Choisir une catégorie</option>
@@ -178,4 +176,5 @@
             }
         });
     </script>
-    {% endblock %}
+</form>
+{% endblock %}
