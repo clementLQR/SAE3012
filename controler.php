@@ -48,8 +48,7 @@
         global $twig;
         echo $twig -> render('enfant-categorie.twig.html', 
         ['categorie' => get_categorie($idCat),
-        "messages" => 
-        ($idCat),
+        "messages" => get_messages_par_categorie_trier_par_date($idCat),
         "utilisateur" => get_all_utilisateur()]);
     }
 
