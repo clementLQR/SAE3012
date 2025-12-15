@@ -47,12 +47,18 @@
     }
 
     .msg img {
-    display: block;
-    margin: 10px auto; 
-    max-width: 30%;   
-    height: auto;   
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-}
+        display: block;
+        margin: 10px auto;
+        max-width: 30%;
+        height: auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .haut2 {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2%;
+    }
 
     form {
         display: flex;
@@ -63,8 +69,8 @@
         height: 100px;
         margin-bottom: 10%;
         border-radius: 10px;
-        width : 85%;
-        margin : auto;
+        width: 85%;
+        margin: auto;
     }
 
     form button {
@@ -77,21 +83,21 @@
     }
 
     .commentaire {
-        margin : auto;
-        border : solid grey 2px;
+        margin: auto;
+        border: solid grey 2px;
         border-radius: 10px;
-        margin-bottom : 4%;
-        padding : 10px;
-        width : 80%;
+        margin-bottom: 4%;
+        padding: 10px;
+        width: 80%;
     }
 
     .commentaire h3 {
-        font-size : 15px;
-        color : rgba(255, 255, 255, 0.716) ;
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.716);
     }
 
     .commentaire p {
-        font-size : 12px;
+        font-size: 12px;
     }
 
     /* --------TABLETTE-------- */
@@ -135,16 +141,16 @@
         }
 
         .commentaire {
-        margin-bottom : 3%;
-    }
+            margin-bottom: 3%;
+        }
 
-    .commentaire h3 {
-        font-size : 17px;
-    }
+        .commentaire h3 {
+            font-size: 17px;
+        }
 
-    .commentaire p {
-        font-size : 14px;
-    }
+        .commentaire p {
+            font-size: 14px;
+        }
     }
 
     /* ------ORDINATEUR--------- */
@@ -187,17 +193,17 @@
             border-radius: 8px;
         }
 
-         .commentaire {
-        margin-bottom : 2%;
-    }
+        .commentaire {
+            margin-bottom: 2%;
+        }
 
-    .commentaire h3 {
-        font-size : 20px;
-    }
+        .commentaire h3 {
+            font-size: 20px;
+        }
 
-    .commentaire p {
-        font-size : 16px;
-    }
+        .commentaire p {
+            font-size: 16px;
+        }
 
     }
 </style>
@@ -214,7 +220,7 @@
         <h2>@{{ messages.auteur }}</h2>
         <p>{{ messages.date }}</p>
     </div>
-    
+
     {% if messages.imageSrc %}
     <img src="{{ messages.imageSrc }}" alt="Message Image de {{ messages.auteur }}">
     {% endif %}
@@ -223,8 +229,10 @@
 
 {% for commentaire in commentaires %}
 <div class="commentaire">
-    <h3>De : @{{ utilisateurs[commentaire.IdUser - 1].identifiant }}</h3>
-    <p>{{ commentaire.dateCom }}</p>
+    <div class="haut2">
+        <h3>De : @{{ utilisateurs[commentaire.IdUser - 1].identifiant }}</h3>
+        <p>{{ commentaire.dateCom }}</p>
+    </div>
     <p>{{ commentaire.texte }}</p>
 </div>
 {% endfor %}
