@@ -14,7 +14,8 @@
         color: #212529;
         padding: 7px;
         border-radius: 10px;
-        height : 40px;
+        height: 40px;
+        margin-bottom: 5%;
     }
 
     h2 {
@@ -26,14 +27,83 @@
         justify-content: space-between;
     }
 
-    p {
-        margin-bottom: 30px;
-    }
-
     #param {
         max-width: 32px;
         border-radius: 15px;
     }
+
+    .msg {
+
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(211, 213, 213, 0.793);
+        border-radius: 10px;
+        padding: 0;
+        margin-bottom: 10%;
+        color: #212529;
+
+    }
+
+    .msg img {
+        max-width: 100%;
+        margin: 10px auto 15px auto;
+        align-self: center;
+    }
+
+    .haut {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4%;
+        background-color: rgb(110, 203, 243);
+        padding: 5px 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        max-height: 20px;
+
+    }
+
+    .haut p {
+        font-size: 13px;
+    }
+
+    .haut h2 {
+        font-size: 17px
+    }
+
+    .texte {
+        text-align: left;
+        padding: 0 10px 10px 10px;
+        margin: 0 0 2% 0;
+        font-size: 16px;
+    }
+
+    .stats {
+        text-align: center;
+        margin-bottom: 5%;
+    }
+
+    form {
+        align-self: center;
+        font-size: 11px;
+        margin-bottom: 3%;
+    }
+
+    button img {
+        width: 20px;
+    }
+
+    .deco {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 35px;
+        gap: 8px;
+        padding: 0 20px 0 20px;
+        background-color: rgba(250, 63, 21, 0.781);
+        border: none;
+        border-radius: 6px;
+    }
+
 
     /* ---------TABLETTE-------- */
 
@@ -53,9 +123,62 @@
             border-radius: 18px;
         }
 
-        p {
-            font-size: 20px;
-            margin-bottom: 30px;
+        .msg-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 4%;
+            width: 90%;
+            margin: 0 auto 10%;
+            align-items: start;
+        }
+
+        .msg {
+            background-color: rgba(211, 213, 213, 0.793);
+            border-radius: 10px;
+            padding: 0;
+            margin-bottom: 10%;
+
+        }
+
+        .msg img {
+            max-width: 100%;
+            margin: 10px auto 15px auto;
+            align-self: center;
+        }
+
+        .haut {
+            margin-bottom: 4%;
+        }
+
+        .haut p {
+            font-size: 11px;
+        }
+
+        .haut h2 {
+            font-size: 17px
+        }
+
+        .texte {
+            font-size: 18px;
+        }
+
+        .stats {
+            margin-bottom: 5%;
+            font-size: 15px;
+        }
+
+        form {
+            margin-bottom: 3%;
+        }
+
+        button img {
+            width: 22px;
+        }
+
+        .deco {
+            height: 40px;
+            gap: 10px;
+            padding: 0 25px 0 25px;
         }
     }
 
@@ -64,7 +187,7 @@
 
         h1 {
             font-size: 45px;
-            margin-bottom : 3%;
+            margin-bottom: 3%;
         }
 
         h2 {
@@ -72,16 +195,68 @@
         }
 
         section {
-        background-color: rgb(110, 203, 243);
-        color: #212529;
-        padding: 10px;
-        border-radius: 10px;
-    }
+            background-color: rgb(110, 203, 243);
+            color: #212529;
+            padding: 10px;
+            border-radius: 10px;
+        }
 
         #param {
             max-width: 37px;
             border-radius: 18px;
         }
+
+        .msg-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            column-gap: 2%;
+            row-gap: 30px;
+            width: 100%;
+            margin: 0 auto 8%;
+            align-items: start;
+        }
+
+        .msg {
+            margin-bottom: 0;
+        }
+
+        .msg img {
+            max-width: 100%;
+            margin: 10px auto 15px auto;
+        }
+
+        .haut {
+            margin-bottom: 2%;
+            padding: 8px 12px 15px 12px;
+        }
+
+        .haut p {
+            font-size: 14px;
+        }
+
+        .haut h2 {
+            font-size: 22px;
+        }
+
+        .texte {
+            font-size: 18px;
+        }
+
+        .stats {
+            margin-bottom: 4%;
+            font-size: 16px;
+        }
+
+        button img {
+            width: 20px;
+        }
+
+        .deco {
+            height: 38px;
+            gap: 8px;
+            padding: 0 20px;
+        }
+
     }
 </style>
 {% endblock %}
@@ -101,22 +276,28 @@
     </div>
     <p>{{utilisateur.biographie}}</p>
 </section>
-{% for message in messages %}
-<div class="msg">
-    <h2>{{ message.categorieNom }}</h2>
-    <form action="/SAE3012/profil" method="post">
-        <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
-        <button type="submit"> <img src="#" alt="suppirmer message"></button>
-    </form>
 
-    <p>{{ message.date }}</p>
-    {% if message.imageSrc %}
-    <img src="{{ message.imageSrc }}" alt="Message Image de {{ message.auteur }}">
-    {% endif %}
-    <p>{{ message.texte }}</p>
-    {{ message.nbrLike }} Likes - {{ message.nbrDislike }} Dislikes - {{ message.nbrCom }} Commentaires
+<div class="msg-container">
+    {% for message in messages %}
+    <div class="msg">
+        <div class="haut">
+            <h2>{{ message.categorieNom }}</h2>
+            <p>{{ message.date }}</p>
+        </div>
+        {% if message.imageSrc %}
+        <img src="{{ message.imageSrc }}" alt="Message Image de {{ message.auteur }}">
+        {% endif %}
+        <p class="texte">{{ message.texte }}</p>
+        <p class="stats"><strong>{{ message.nbrLike }} Likes - {{ message.nbrDislike }} Dislikes - {{ message.nbrCom }}
+                Commentaires</strong></p>
+        <form action="/SAE3012/profil" method="post">
+            <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
+            <button class="deco" type="submit"><img src="images/supprimer.png" alt="">Supprimer</button>
+        </form>
+
+
+    </div>
+    {% endfor %}
 </div>
-{% endfor %}
-
 
 {% endblock %}

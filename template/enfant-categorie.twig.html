@@ -5,6 +5,7 @@
 <style>
     /* -----------MOBILE----------- */
     h1 {
+        font-size: 35px;
         background-color: rgb(110, 203, 243);
         color: #212529;
         border-radius: 10px;
@@ -37,7 +38,7 @@
 
     .msg {
         margin: 0 auto 10% auto;
-        width: 95%;
+        width: 100%;
         background-color: rgba(236, 243, 243, 0.793);
         border-radius: 10px;
         color: #212529;
@@ -64,7 +65,7 @@
 
     .msg img {
         display: block;
-        max-width: 70%;
+        max-width: 100%;
         margin: 10px auto 15px auto;
     }
 
@@ -72,6 +73,7 @@
         text-align: left;
         padding: 0 10px 10px 10px;
         margin: 0;
+        font-size: 16px;
     }
 
     .stats {
@@ -95,36 +97,157 @@
     }
 
     /* -----------TABLETTE----------- */
-    @media (min-width: 768px) {
+    @media only screen and (min-width: 768px) {
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 3%;
+            margin-right: 4%;
+
+        }
+
+        .filtres {
+            width: 325px;
+            margin: auto;
+            font-size: 20px;
+            margin-bottom: 6%;
+        }
+
+        .filtres button,
+        select {
+            font-size: 16px;
+            padding: 2px;
+        }
+
+        .filtres button {
+            background-color: rgb(110, 203, 243);
+            border-radius: 4px;
+            width: 100px;
+        }
+
         .msg-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1%;
+            column-gap: 4%;
             align-items: start;
+            width: 90%;
+            margin: 0 auto 10%;
         }
 
         .msg {
-            display: flex;
-            flex-direction: column;
             background-color: rgba(211, 213, 213, 0.793);
             border-radius: 10px;
             padding: 0;
+        }
 
+        .texte {
+            font-size: 18px;
+        }
+
+        .haut {
+            margin-bottom: 4%;
+        }
+
+        .haut p {
+            font-size: 11px;
+        }
+
+        .haut h2 {
+            font-size: 17px
         }
 
         .msg img {
-            max-width: 80%;
+            display: block;
+            max-width: 100%;
             margin: 10px auto 15px auto;
-            align-self: center;
+        }
+
+        .texte {
+            margin: 0;
+        }
+
+        button img {
+            width: 20px;
+        }
+
+        .stats button {
+            font-size: 15px;
+        }
+    }
+
+    /* -----------ORDINATEUR----------- */
+    @media only screen and (min-width: 1024px) {
+        h1 {
+            font-size: 40px;
+            margin-bottom: 3%;
+            margin-right: 4%;
+
+        }
+
+        .filtres {
+            width: 325px;
+            margin: auto;
+            font-size: 20px;
+            margin-bottom: 6%;
+        }
+
+        .filtres button,
+        select {
+            font-size: 16px;
+            padding: 2px;
+        }
+
+        .filtres button {
+            background-color: rgb(110, 203, 243);
+            border-radius: 4px;
+            width: 100px;
+        }
+
+        .msg-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            align-items: start;
+            width: 100%;
+            margin: 0 auto 10% auto;
+        }
+
+        .msg {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+
+        .msg img {
+            max-width: 100%;
+            margin: 10px auto 15px auto;
+        }
+
+        .haut {
+            margin-bottom: 4%;
+        }
+
+        .haut p {
+            font-size: 11px;
+        }
+
+        .haut h2 {
+            font-size: 17px
         }
 
         .texte {
             padding: 0 10px 10px 10px;
         }
+
+        button img {
+            width: 20px;
+        }
+
+        .stats button {
+            font-size: 15px;
+        }
     }
-
-
-    /* -----------ORDINATEUR----------- */
 </style>
 
 {% endblock %}
@@ -160,19 +283,19 @@
         <div class="stats">
             <form action="/SAE3012/commentaires" method="post">
                 <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
-                <button type="submit" class="commentBtn"><img src="images/commenter.png">Commentaires <span>{{
+                <button type="submit" class="commentBtn"><img src="images/commenter.png"><span>{{
                         message.nbrCom }}</span></button>
             </form>
             <form action="{{ categorie.nom }}" method="post">
                 <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
                 <input type="hidden" name="like" value="1">
-                <button type="submit" class="likeBtn"><img src="images/like.png">Like <span>{{ message.nbrLike
+                <button type="submit" class="likeBtn"><img src="images/like.png"><span>{{ message.nbrLike
                         }}</span></button>
             </form>
             <form action="{{ categorie.nom }}" method="post">
                 <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
                 <input type="hidden" name="dislike" value="2">
-                <button type="submit" class="dislikBtn"><img src="images/dislike.png">Dislike <span>{{
+                <button type="submit" class="dislikBtn"><img src="images/dislike.png"><span>{{
                         message.nbrDislike
                         }}</span></button>
             </form>
