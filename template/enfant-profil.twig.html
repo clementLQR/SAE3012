@@ -6,14 +6,15 @@
     /* -----------MOBILE------------ */
     h1 {
         font-size: 35px;
-        margin-bottom: 15%;
+        margin-bottom: 10%;
     }
 
     section {
         background-color: rgb(110, 203, 243);
         color: #212529;
-        padding: 10px;
+        padding: 7px;
         border-radius: 10px;
+        height : 40px;
     }
 
     h2 {
@@ -33,20 +34,6 @@
         max-width: 32px;
         border-radius: 15px;
     }
-
-    .boutons {
-        display: flex;
-        justify-content: space-evenly;
-        border-radius: 10px;
-        padding: 7px;
-    }
-
-    button {
-        border: none;
-        background-color: rgb(110, 203, 243);
-        font-size: 17px;
-    }
-
 
     /* ---------TABLETTE-------- */
 
@@ -69,10 +56,6 @@
         p {
             font-size: 20px;
             margin-bottom: 30px;
-        }
-
-        button {
-            font-size: 25px;
         }
     }
 
@@ -99,10 +82,6 @@
             max-width: 37px;
             border-radius: 18px;
         }
-
-        button {
-            font-size: 30px;
-        }
     }
 </style>
 {% endblock %}
@@ -121,12 +100,6 @@
         </a>
     </div>
     <p>{{utilisateur.biographie}}</p>
-
-    <div class="boutons">
-        <button>Posts</button>
-        <button>Likes</button>
-        <button>Commentaires</button>
-    </div>
 </section>
 {% for message in messages %}
 <div class="msg">

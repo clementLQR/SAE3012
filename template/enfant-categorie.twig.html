@@ -17,10 +17,10 @@
     }
 
     .filtres {
-        width: 270px;
+        width: 290px;
         margin: auto;
         font-size: 18px;
-        margin-bottom: 8%;
+        margin-bottom: 6%;
     }
 
     .filtres button,
@@ -32,25 +32,98 @@
     .filtres button {
         background-color: rgb(110, 203, 243);
         border-radius: 4px;
+        width: 80px;
     }
 
     .msg {
-        margin: auto;
-        width: 90%;
-        border: solid red;
+        margin: 0 auto 10% auto;
+        width: 95%;
+        background-color: rgba(236, 243, 243, 0.793);
+        border-radius: 10px;
+        color: #212529;
+        text-align: center;
     }
 
     .haut {
-        display :flex;
+        display: flex;
         justify-content: space-between;
+        margin-bottom: 4%;
+        background-color: rgb(110, 203, 243);
+        padding: 5px 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
     }
 
     .haut p {
-        font-size : 11px;
+        font-size: 11px;
+    }
+
+    .haut h2 {
+        font-size: 17px
+    }
+
+    .msg img {
+        display: block;
+        max-width: 70%;
+        margin: 10px auto 15px auto;
+    }
+
+    .texte {
+        text-align: left;
+        padding: 0 10px 10px 10px;
+        margin: 0;
+    }
+
+    .stats {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    button img {
+        width: 20px;
+    }
+
+    .stats button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 3px;
+        background: none;
+        color: #212529;
+        border: none;
+    }
+
+    /* -----------TABLETTE----------- */
+    @media (min-width: 768px) {
+        .msg-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1%;
+            align-items: start;
+        }
+
+        .msg {
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(211, 213, 213, 0.793);
+            border-radius: 10px;
+            padding: 0;
+
+        }
+
+        .msg img {
+            max-width: 80%;
+            margin: 10px auto 15px auto;
+            align-self: center;
+        }
+
+        .texte {
+            padding: 0 10px 10px 10px;
+        }
     }
 
 
-    /* -----------TABLETTE----------- */
     /* -----------ORDINATEUR----------- */
 </style>
 
@@ -73,33 +146,39 @@
     </select>
     <button type="submit">Appliquer</button>
 </form>
-{% for message in messages %}
-<div class="msg">
-    <div class="haut">
-        <h2>@{{ message.auteur }}</h2>
-        <p>{{ message.date }}</p>
+<div class="msg-container">
+    {% for message in messages %}
+    <div class="msg">
+        <div class="haut">
+            <h2>@{{ message.auteur }}</h2>
+            <p>{{ message.date }}</p>
+        </div>
+        {% if message.imageSrc %}
+        <img src="{{ message.imageSrc }}" alt="Message Image de {{ message.auteur }}">
+        {% endif %}
+        <p class="texte">{{ message.texte }}</p>
+        <div class="stats">
+            <form action="/SAE3012/commentaires" method="post">
+                <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
+                <button type="submit" class="commentBtn"><img src="images/commenter.png">Commentaires <span>{{
+                        message.nbrCom }}</span></button>
+            </form>
+            <form action="{{ categorie.nom }}" method="post">
+                <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
+                <input type="hidden" name="like" value="1">
+                <button type="submit" class="likeBtn"><img src="images/like.png">Like <span>{{ message.nbrLike
+                        }}</span></button>
+            </form>
+            <form action="{{ categorie.nom }}" method="post">
+                <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
+                <input type="hidden" name="dislike" value="2">
+                <button type="submit" class="dislikBtn"><img src="images/dislike.png">Dislike <span>{{
+                        message.nbrDislike
+                        }}</span></button>
+            </form>
+        </div>
     </div>
-    {% if message.imageSrc %}
-    <img src="{{ message.imageSrc }}" alt="Message Image de {{ message.auteur }}">
-    {% endif %}
-    <p>{{ message.texte }}</p>
-    <div>
-        <form action="/SAE3012/commentaires" method="post">
-            <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
-            <button type="submit" class="commentBtn">commentaires <span>{{ message.nbrCom }}</span></button>
-        </form>
-        <form action="{{ categorie.nom }}" method="post">
-            <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
-            <input type="hidden" name="like" value="1">
-            <button type="submit" class="likeBtn">Like <span>{{ message.nbrLike }}</span></button>
-        </form>
-        <form action="{{ categorie.nom }}" method="post">
-            <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
-            <input type="hidden" name="dislike" value="2">
-            <button type="submit" class="dislikBtn">Dislike <span>{{ message.nbrDislike }}</span></button>
-        </form>
-    </div>
+    {% endfor %}
 </div>
-{% endfor %}
 
 {% endblock %}
