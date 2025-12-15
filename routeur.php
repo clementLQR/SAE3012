@@ -69,12 +69,13 @@
     }
 
     else if ($section == 'jeux%20video'){  
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
-            return afficher_page_categorie_trier_par_date(1);
-        }
-
-        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
-            return afficher_page_categorie_trier_par_likes(1);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tri'])) {
+            if ($_POST['tri'] === 'Plus récent') {
+                return afficher_page_categorie_trier_par_date(1);
+            } 
+            else if ($_POST['tri'] === 'Plus de Likes') {
+                return afficher_page_categorie_trier_par_likes(1);
+            }
         }
 
         else if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -88,7 +89,7 @@
                 dislike_message($messageId, $userId);
             }
         }
-        afficher_page_categorie(1);
+        return afficher_page_categorie(1);
     }
 
     else if ($section == 'musique'){
