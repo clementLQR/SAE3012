@@ -224,7 +224,7 @@
 {% for commentaire in commentaires %}
 <div class="commentaire">
     <h3>De : @{{ utilisateurs[commentaire.IdUser - 1].identifiant }}</h3>
-    <p>{{ commentaire.date }}</p>
+    <p>{{ commentaire.dateCom }}</p>
     <p>{{ commentaire.texte }}</p>
 </div>
 {% endfor %}
