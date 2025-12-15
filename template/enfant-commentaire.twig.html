@@ -2,37 +2,238 @@
 {% block title %}Commentaires{% endblock %}
 
 {% block style %}
+<style>
+    /* -----MOBILE-------- */
+    h1 {
+        font-size: 35px;
+        margin-bottom: 15%;
+    }
 
-{% endblock %} 
+    .msg {
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(211, 213, 213, 0.793);
+        border-radius: 10px;
+        padding: 0;
+        margin-bottom: 7%;
+        color: #212529;
+    }
+
+    .haut {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2%;
+        background-color: rgb(110, 203, 243);
+        padding: 5px 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        max-height: 20px;
+
+    }
+
+    .haut p {
+        font-size: 13px;
+    }
+
+    .haut h2 {
+        font-size: 17px
+    }
+
+    .texte {
+        text-align: left;
+        padding: 0 10px 10px 10px;
+        margin: 0 0 10px 0;
+        font-size: 16px;
+    }
+
+    .msg img {
+    display: block;
+    margin: 10px auto; 
+    max-width: 30%;   
+    height: auto;   
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+}
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    form textarea {
+        height: 100px;
+        margin-bottom: 10%;
+        border-radius: 10px;
+        width : 85%;
+        margin : auto;
+    }
+
+    form button {
+        width: 100px;
+        height: 30px;
+        font-size: 17px;
+        margin: auto;
+        background-color: rgb(110, 203, 243);
+        border-radius: 6px;
+    }
+
+    .commentaire {
+        margin : auto;
+        border : solid grey 2px;
+        border-radius: 10px;
+        margin-bottom : 4%;
+        padding : 10px;
+        width : 80%;
+    }
+
+    .commentaire h3 {
+        font-size : 15px;
+        color : rgba(255, 255, 255, 0.716) ;
+    }
+
+    .commentaire p {
+        font-size : 12px;
+    }
+
+    /* --------TABLETTE-------- */
+    @media only screen and (min-width : 768px) {
+        h1 {
+            font-size: 40px;
+            margin-bottom: 10%;
+        }
+
+        .msg {
+            margin-bottom: 5%;
+        }
+
+        .haut {
+            margin-bottom: 2%;
+            max-height: 25px;
+
+        }
+
+        .haut p {
+            font-size: 15px;
+        }
+
+        .haut h2 {
+            font-size: 20px
+        }
+
+        .texte {
+            font-size: 18px;
+        }
+
+        form textarea {
+            margin-bottom: 7%;
+        }
+
+        form button {
+            width: 120px;
+            height: 45px;
+            font-size: 20px;
+            border-radius: 7px;
+        }
+
+        .commentaire {
+        margin-bottom : 3%;
+    }
+
+    .commentaire h3 {
+        font-size : 17px;
+    }
+
+    .commentaire p {
+        font-size : 14px;
+    }
+    }
+
+    /* ------ORDINATEUR--------- */
+    @media only screen and (min-width: 1024px) {
+        h1 {
+            font-size: 45px;
+            margin-bottom: 5%;
+        }
+
+        .msg {
+            margin-bottom: 3%;
+        }
+
+        .haut {
+            margin-bottom: 1%;
+            max-height: 30px;
+
+        }
+
+        .haut p {
+            font-size: 15px;
+        }
+
+        .haut h2 {
+            font-size: 22px
+        }
+
+        .texte {
+            font-size: 18px;
+        }
+
+        form textarea {
+            margin-bottom: 7%;
+        }
+
+        form button {
+            width: 130px;
+            height: 50px;
+            font-size: 21px;
+            border-radius: 8px;
+        }
+
+         .commentaire {
+        margin-bottom : 2%;
+    }
+
+    .commentaire h3 {
+        font-size : 20px;
+    }
+
+    .commentaire p {
+        font-size : 16px;
+    }
+
+    }
+</style>
+{% endblock %}
 
 {% block header %}
- <h1>Commentaires</h1>
-{% endblock %} 
+<h1>Commentaires</h1>
+{% endblock %}
 
 
 {% block contenu %}
-        <h2>{{ messages.auteur }}</h2>
+<div class="msg">
+    <div class="haut">
+        <h2>@{{ messages.auteur }}</h2>
         <p>{{ messages.date }}</p>
-        {% if messages.imageSrc %}
-            <img src="{{ messages.imageSrc }}" alt="Message Image de {{ messages.auteur }}"> 
-        {% endif %}
-        <p>{{ messages.texte }}</p>
+    </div>
+    
+    {% if messages.imageSrc %}
+    <img src="{{ messages.imageSrc }}" alt="Message Image de {{ messages.auteur }}">
+    {% endif %}
+    <p class="texte">{{ messages.texte }}</p>
+</div>
 
-        <hr>
+{% for commentaire in commentaires %}
+<div class="commentaire">
+    <h3>De : @{{ utilisateurs[commentaire.IdUser - 1].identifiant }}</h3>
+    <p>{{ commentaire.date }}</p>
+    <p>{{ commentaire.texte }}</p>
+</div>
+{% endfor %}
 
-    {% for commentaire in commentaires %}
-        <div class="commentaire">
-            <h3>{{ utilisateurs[commentaire.IdUser - 1].identifiant }}</h3>
-            <p>{{ commentaire.date }}</p>
-            <p>{{ commentaire.texte }}</p>
-        </div>
-    {% endfor %}
-
-    <form action="/SAE3012/commentaires" method="post">
-        <input type="hidden" name="messageId" value="{{ messages.IdMsg }}">
-        <textarea name="texte" rows="4" cols="50" placeholder="Écrire un commentaire..."></textarea>
-        <button type="submit">Publier le commentaire</button>
-    </form>
+<form action="/SAE3012/commentaires" method="post">
+    <input type="hidden" name="messageId" value="{{ messages.IdMsg }}">
+    <textarea name="texte" placeholder="Écrire un commentaire..."></textarea>
+    <button type="submit">Publier</button>
+</form>
 
 
 

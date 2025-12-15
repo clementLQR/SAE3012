@@ -24,14 +24,21 @@
         border-radius: 10px;
         width: 300px;
         text-align: center;
+        border: none;
+    }
+
+    button:active {
+        background-color: rgb(82, 150, 179);
+        transition: transform 0.2s ease, background-color 0,2s ease;
     }
 
     .deco {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;        
-        background-color :rgba(198, 201, 205, 0.781);
+        gap: 8px;
+        background-color: rgba(250, 63, 21, 0.781);
+        border: none;
 
     }
 
@@ -72,16 +79,28 @@
         }
 
         div {
-        display: flex;
-        flex-direction: row ;
-        justify-content: space-around;
-        gap: 70px;
-    }
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            gap: 70px;
+        }
 
         button {
             font-size: 28px;
             height: 75px;
             width: 350px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: rgb(82, 150, 179);
+        }
+
+        button.deco:hover {
+            transform: scale(1.05);
+            background-color: rgba(179, 49, 22, 0.85);
         }
 
         button img {
@@ -89,9 +108,6 @@
 
         }
     }
-
-    
-    
 </style>
 
 {% endblock %}
