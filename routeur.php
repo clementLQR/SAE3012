@@ -93,12 +93,13 @@
     }
 
     else if ($section == 'musique'){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
-            return afficher_page_categorie_trier_par_date(2);
-        }
-
-        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
-            return afficher_page_categorie_trier_par_likes(2);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tri'])) {
+            if ($_POST['tri'] === 'Plus récent') {
+                return afficher_page_categorie_trier_par_date(2);
+            } 
+            else if ($_POST['tri'] === 'Plus de Likes') {
+                return afficher_page_categorie_trier_par_likes(2);
+            }
         }
 
         else if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -117,12 +118,13 @@
 
     else if ($section == 'films'){
         
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
-            return afficher_page_categorie_trier_par_date(3);
-        }
-
-        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
-            return afficher_page_categorie_trier_par_likes(3);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tri'])) {
+            if ($_POST['tri'] === 'Plus récent') {
+                return afficher_page_categorie_trier_par_date(3);
+            } 
+            else if ($_POST['tri'] === 'Plus de Likes') {
+                return afficher_page_categorie_trier_par_likes(3);
+            }
         }
 
         else if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -140,12 +142,13 @@
     }
 
     else if ($section == 'livres'){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
-            return afficher_page_categorie_trier_par_date(4);
-        }
-
-        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
-            return afficher_page_categorie_trier_par_likes(4);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tri'])) {
+            if ($_POST['tri'] === 'Plus récent') {
+                return afficher_page_categorie_trier_par_date(4);
+            } 
+            else if ($_POST['tri'] === 'Plus de Likes') {
+                return afficher_page_categorie_trier_par_likes(4);
+            }
         }
 
         else if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -163,12 +166,12 @@
     }
 
     else if ($section == 'sport'){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
-            return afficher_page_categorie_trier_par_date(5);
-        }
-
-        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
-            return afficher_page_categorie_trier_par_likes(5);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tri'])) {
+            if ($_POST['tri'] === 'Plus récent') {
+                return afficher_page_categorie_trier_par_date(5);
+            } 
+            else if ($_POST['tri'] === 'Plus de Likes') {
+                return afficher_page_categorie_trier_par_likes(5);
         }
 
         else if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -183,15 +186,16 @@
             }
         }
         afficher_page_categorie(5);
-    }
+    }}
 
     else if ($section == 'peinture%20et%20dessin'){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
-            return afficher_page_categorie_trier_par_date(6);
-        }
-
-        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
-            return afficher_page_categorie_trier_par_likes(6);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tri'])) {
+            if ($_POST['tri'] === 'Plus récent') {
+                return afficher_page_categorie_trier_par_date(6);
+            } 
+            else if ($_POST['tri'] === 'Plus de Likes') {
+                return afficher_page_categorie_trier_par_likes(6);
+            }
         }
 
         else if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -209,12 +213,13 @@
     }
 
     else if ($section == 'photographie'){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
-            return afficher_page_categorie_trier_par_date(7);
-        }
-
-        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
-            return afficher_page_categorie_trier_par_likes(7);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tri'])) {
+            if ($_POST['tri'] === 'Plus récent') {
+                return afficher_page_categorie_trier_par_date(7);
+            } 
+            else if ($_POST['tri'] === 'Plus de Likes') {
+                return afficher_page_categorie_trier_par_likes(7);
+            }
         }
 
         else if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -232,12 +237,13 @@
     }
 
     else if ($section == 'series'){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus récent'){
-            return afficher_page_categorie_trier_par_date(8);
-        }
-
-        else if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['tri'] == 'Plus de Likes'){
-            return afficher_page_categorie_trier_par_likes(8);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tri'])) {
+            if ($_POST['tri'] === 'Plus récent') {
+                return afficher_page_categorie_trier_par_date(8);
+            } 
+            else if ($_POST['tri'] === 'Plus de Likes') {
+                return afficher_page_categorie_trier_par_likes(8);
+            }
         }
 
         else if ($_SERVER['REQUEST_METHOD'] == 'POST')
