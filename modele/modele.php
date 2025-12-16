@@ -13,6 +13,9 @@
 
     function insert_utilisateur($identifiant, $mdp) {
         global $mysqli;
+
+        $mdp = password_hash($mdp, PASSWORD_DEFAULT);
+
         // Vérifier si identifiant existe
         $queryCheck = "SELECT idUser FROM utilisateur WHERE identifiant = '$identifiant' LIMIT 1";
         $resultCheck = mysqli_query($mysqli, $queryCheck);
@@ -32,6 +35,7 @@
 
     function connecte_utilisateur($identifiant, $mdp) {
         global $mysqli;
+        
 
         $query = "SELECT * FROM utilisateur WHERE identifiant = '$identifiant' LIMIT 1";
         $result = mysqli_query($mysqli, $query);
@@ -39,7 +43,7 @@
         if (!$utilisateur) { // Utilisateur introuvable
             return false;
         }
-        if ($utilisateur['mdp'] !== $mdp) { // Vérification du mot de passe (en clair dans ta BDD)
+        if (!password_verify($mdp, $utilisateur['mdp'])) { // Vérification du mot de passe (en clair dans ta BDD)
             return false;
         }
         $_SESSION['utilisateur'] = $utilisateur;// Connexion : on enregistre dans la session
