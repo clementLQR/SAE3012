@@ -13,15 +13,16 @@
     $section = $pathExplode[1] ?? null;  
     $action  = $pathExplode[2] ?? null; 
 
-    echo '<br>';
-    print_r($pathExplode);
-    echo '<br>';
-    print_r($_SESSION);
-    echo '<br>';
-    echo '<br> <p>section : </p>'.$section.'<br>';
-    echo '<br> <p>action : </p>'.$action.'<br>';
-    print_r($_POST);
-    echo '<br>';
+    /* debug */
+    // echo '<br>';
+    // print_r($pathExplode);
+    // echo '<br>';
+    // print_r($_SESSION);
+    // echo '<br>';
+    // echo '<br> <p>section : </p>'.$section.'<br>';
+    // echo '<br> <p>action : </p>'.$action.'<br>';
+    // print_r($_POST);
+    // echo '<br>';
 
     /*  si une session n'existe pas et que l'utilisateur n'est pas sur la page de connexion-inscription */
     if ($_SESSION == null && $section != 'connexion-inscription'){
