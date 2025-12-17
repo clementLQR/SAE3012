@@ -80,7 +80,7 @@
          "utilisateur"=> $utilisateur]);
     }
 
-    function publier_message($idCat, $idUser, $texte) { /* surment à mettre dans le routeur */
+    function publier_message($idCat, $idUser, $texte) {
         insert_message_avec_image($idCat, $idUser, $texte);
     }
 
