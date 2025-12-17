@@ -8,6 +8,24 @@
         font-size: 35px;
         margin-bottom: 15%;
     }
+    .boutons {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    form button {
+        font-size: 20px;
+        padding: 10px;
+        width: 180px;
+        margin: auto;
+        background-color: rgb(110, 203, 243);
+        border-radius: 10px;
+    }
+
+    form button:active {
+        background-color: rgb(82, 150, 179);
+        transition: transform 0.2s ease, background-color 0.2s ease;
+    }
 
     .msg {
         display: flex;
@@ -73,15 +91,6 @@
         margin: auto;
     }
 
-    form button {
-        width: 100px;
-        height: 30px;
-        font-size: 17px;
-        margin: auto;
-        background-color: rgb(110, 203, 243);
-        border-radius: 6px;
-    }
-
     .commentaire {
         margin: auto;
         border: solid grey 2px;
@@ -134,10 +143,8 @@
         }
 
         form button {
-            width: 120px;
-            height: 45px;
-            font-size: 20px;
-            border-radius: 7px;
+            font-size: 25px;
+            width: 220px;
         }
 
         .commentaire {
@@ -187,10 +194,15 @@
         }
 
         form button {
-            width: 130px;
-            height: 50px;
-            font-size: 21px;
-            border-radius: 8px;
+            font-size: 30px;
+            width: 300px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            transform: scale(1.05);
+            background-color: rgb(82, 150, 179);
         }
 
         .commentaire {
