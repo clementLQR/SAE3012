@@ -279,10 +279,10 @@
     function get_all_commentaire_par_message($messageId){
         global $mysqli;
         /* Récupère tous les commentaires d'un message */
-        $query = 'SELECT *,utilisateur.identifiant AS auteur
+        $query = "SELECT *,utilisateur.identifiant AS auteur
         FROM commentaire INNER JOIN utilisateur 
         ON commentaire.IdUser = utilisateur.IdUser WHERE IdMsg = $messageId
-        ORDER BY dateCom ASC';
+        ORDER BY dateCom ASC";
         $result = mysqli_query($mysqli, $query);
         $commentaire = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $commentaire;

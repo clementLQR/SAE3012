@@ -249,7 +249,7 @@
 </div>
 {% endfor %}
 
-<form action="localhost/SAE3012/commentaires" method="post">
+<form action="/SAE3012/commentaires" method="post">
     <input type="hidden" name="messageId" value="{{ messages.IdMsg }}">
     <textarea name="texte" placeholder="Écrire un commentaire..."></textarea>
     <button type="submit">Publier</button>

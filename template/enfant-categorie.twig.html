@@ -283,7 +283,7 @@
 
 {% block contenu %}
 <!-- <p>Liste des messages de la categorie {{categorie.nom}}</p> -->
-<form class="filtres" action="localhost/SAE3012/{{categorie.nom}}" method="post">
+<form class="filtres" action="/SAE3012/{{categorie.nom}}" method="post">
     <label for="tri">Trier par :</label>
     <select name="tri" id="tri">
         <option>Plus récent</option>
@@ -303,12 +303,12 @@
         {% endif %}
         <p class="texte">{{ message.texte }}</p>
         <div class="stats">
-            <form action="localhost/SAE3012/commentaires" method="post">
+            <form action="/SAE3012/commentaires" method="post">
                 <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
                 <button type="submit" class="commentBtn"><img src="images/commenter.png"><span>{{
                         message.nbrCom }}</span></button>
             </form>
-            <form action="localhost/SAE3012/{{ categorie.nom }}" method="post">
+            <form action="/SAE3012/{{ categorie.nom }}" method="post">
                 <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
                 <input type="hidden" name="like" value="1">
                 <button type="submit" class="likeBtn"><img src="images/like.png"><span>{{ message.nbrLike

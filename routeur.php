@@ -13,19 +13,19 @@
     $section = $pathExplode[1] ?? null;  
     $action  = $pathExplode[2] ?? null; 
 
-    // echo '<br>';
-    // print_r($pathExplode);
-    // echo '<br>';
-    // print_r($_SESSION);
-    // echo '<br>';
-    // echo '<br> <p>section : </p>'.$section.'<br>';
-    // echo '<br> <p>action : </p>'.$action.'<br>';
-    // print_r($_POST);
-    // echo '<br>';
+    echo '<br>';
+    print_r($pathExplode);
+    echo '<br>';
+    print_r($_SESSION);
+    echo '<br>';
+    echo '<br> <p>section : </p>'.$section.'<br>';
+    echo '<br> <p>action : </p>'.$action.'<br>';
+    print_r($_POST);
+    echo '<br>';
 
     /*  si une session n'existe pas et que l'utilisateur n'est pas sur la page de connexion-inscription */
     if ($_SESSION == null && $section != 'connexion-inscription'){
-        header('Location: http://localhost/SAE3012/connexion-inscription' );
+        header('Location: /SAE3012/connexion-inscription' );
         afficher_page_connexion_inscription();
     }
 
@@ -284,7 +284,7 @@
             $idCat = $_POST['idCat'];
             $idUser = $_SESSION['utilisateur']['IdUser'];
             $texte = $_POST['texte'];
-            header('Location: http://localhost/SAE3012' );
+            header('Location: /SAE3012' );
             return publier_message($idCat, $idUser, $texte);
         }
         $utilisateur = $_SESSION['utilisateur'];
