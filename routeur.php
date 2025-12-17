@@ -173,14 +173,16 @@
 
     /* si l'utilisateur est sur une page de catégorie sport */
     else if ($section == 'sport'){
-        /* gestion du tri */
+    /* gestion du tri */
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tri'])) {
             if ($_POST['tri'] === 'Plus récent') {
                 return afficher_page_categorie_trier_par_date(5);
             } 
             else if ($_POST['tri'] === 'Plus de Likes') {
                 return afficher_page_categorie_trier_par_likes(5);
+            }
         }
+
         /* gestion des likes et dislikes */
         else if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
@@ -192,8 +194,8 @@
             else if (isset($_POST['dislike'])){
                 dislike_message($messageId, $userId);
             }
-        }}
-    afficher_page_categorie(5);
+        }
+        afficher_page_categorie(5);
     }
 
     /* si l'utilisateur est sur une page de catégorie peinture et dessin */
