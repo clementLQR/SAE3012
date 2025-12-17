@@ -2,6 +2,7 @@
     session_start();
     require 'controler.php';
     require 'vendor/autoload.php';
+    
 
     // Récupérer l'URL et découper le chemin
     $url = parse_url($_SERVER['REQUEST_URI']);
@@ -17,8 +18,8 @@
     // echo '<br>';
     // print_r($_SESSION);
     // echo '<br>';
-    // echo '<br>'.$section.'<br>';
-    // echo '<br>'.$action.'<br>';
+    // echo '<br> <p>section : </p>'.$section.'<br>';
+    // echo '<br> <p>action : </p>'.$action.'<br>';
     // print_r($_POST);
     // echo '<br>';
 
@@ -184,9 +185,9 @@
             else if (isset($_POST['dislike'])){
                 dislike_message($messageId, $userId);
             }
-        }
-        afficher_page_categorie(5);
-    }}
+        }}
+    afficher_page_categorie(5);
+    }
 
     else if ($section == 'peinture%20et%20dessin'){
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tri'])) {

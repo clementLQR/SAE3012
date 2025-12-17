@@ -14,7 +14,6 @@
         color: #212529;
         padding: 7px;
         border-radius: 10px;
-        height: 40px;
         margin-bottom: 5%;
     }
 
@@ -215,7 +214,7 @@
 
         .msg-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             column-gap: 2%;
             row-gap: 30px;
             width: 100%;
@@ -284,7 +283,7 @@
 <section>
     <div class="pseudo">
         <h2>@{{utilisateur.identifiant}}</h2>
-        <a href="/SAE3012/parametre">
+        <a href="localhost/SAE3012/parametre">
             <img id="param" src="images/parametres.png" alt="parametre">
         </a>
     </div>
@@ -304,7 +303,7 @@
         <p class="texte">{{ message.texte }}</p>
         <p class="stats"><strong>{{ message.nbrLike }} Likes - {{ message.nbrDislike }} Dislikes - {{ message.nbrCom }}
                 Commentaires</strong></p>
-        <form action="/SAE3012/profil" method="post">
+        <form action="localhost/SAE3012/profil" method="post">
             <input type="hidden" name="messageId" value="{{ message.IdMsg }}">
             <button class="deco" type="submit"><img src="images/supprimer.png" alt="">Supprimer</button>
         </form>

@@ -42,6 +42,12 @@
         margin: auto;
         border-radius: 8px;
         background-color: rgb(110, 203, 243);
+
+    }
+
+    .buttons button:active {
+        background-color: rgb(82, 150, 179);
+        transition: transform 0.2s ease, background-color 0.2s ease;
     }
 
     .buttons a {
@@ -86,13 +92,24 @@
 
         .buttons button {
             font-size: 25px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .buttons button:hover {
+            transform: scale(1.05);
+            background-color: rgb(82, 150, 179);
+        }
+
+        .buttons a button:hover {
+            transform: scale(1.05);
+            background-color: rgb(161, 161, 161);
         }
 
         textarea {
-            margin-bottom : 5%;
+            margin-bottom: 5%;
         }
     }
-
 </style>
 
 {% endblock %}
@@ -104,12 +121,12 @@
 
 {% block contenu %}
 
-<form method="post" action="/SAE3012/biographie">
+<form method="post" action="localhost/SAE3012/biographie">
     <label for="biographie">Rédigez votre biographie : </label>
     <textarea id="biographie" name="biographie"></textarea>
     <div class="buttons">
         <button type="submit">Enregistrer</button>
-        <a href="/SAE3012/parametre"><button type="button">Annuler</button></a>
+        <a href="localhost/SAE3012/parametre"><button type="button">Annuler</button></a>
     </div>
 </form>
 

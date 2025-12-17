@@ -142,7 +142,7 @@
         <button class="btn" data-target="inscription">Inscription</button>
     </div>
     <div id="connexion" class="formulaire">
-        <form method="post" action="/SAE3012/connexion-inscription/connexion" class="formConnexion">
+        <form method="post" action="localhost/SAE3012/connexion-inscription/connexion" class="formConnexion">
             <label for="identifiant">Identifiant :</label>
             <input type="text" id="identifiant" name="identifiant" required>
             <label for="mdp">Mot de passe :</label>
@@ -152,7 +152,7 @@
     </div>
 
     <div id="inscription" class="formulaire">
-        <form method="post" action="/SAE3012/connexion-inscription/inscription" class="formInscription"
+        <form method="post" action="localhost/SAE3012/connexion-inscription/inscription" class="formInscription"
             id="formInscription">
             <label for="nouvel_identifiant">Identifiant :</label>
             <input type="text" id="nouvel_identifiant" name="nouvel_identifiant" required>
@@ -168,5 +168,36 @@
     </div>
 </div>
 
-<script src="script/pageConnexionInscription.js"></script>
+<script>
+    const buttons = document.querySelectorAll('.btn');
+    const formulaires = document.querySelectorAll('.formulaire');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+
+        formulaires.forEach(form => form.style.display = 'none');
+
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        const targetId = button.getAttribute('data-target');
+        document.getElementById(targetId).style.display = 'block';
+
+        button.classList.add('active');
+        });
+    });
+
+    buttons[0].click();
+
+    const form = document.getElementById('formInscription');
+    const mdp = document.getElementById('nouveau_mdp');
+    const confirmation = document.getElementById('confirmation_mdp');
+
+    form.addEventListener('submit', function(e) {
+        if (mdp.value !== confirmation.value) {
+            e.preventDefault(); 
+            console.log("Les mots de passe ne correspondent pas.");
+            alert("Les mots de passe ne correspondent pas.");
+        }
+    });
+</script>
 {% endblock %}

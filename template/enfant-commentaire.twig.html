@@ -230,14 +230,14 @@
 {% for commentaire in commentaires %}
 <div class="commentaire">
     <div class="haut2">
-        <h3>De : @{{ utilisateurs[commentaire.IdUser - 1].identifiant }}</h3>
+        <h3>De : @{{ commentaire.auteur }}</h3>
         <p>{{ commentaire.dateCom }}</p>
     </div>
     <p>{{ commentaire.texte }}</p>
 </div>
 {% endfor %}
 
-<form action="/SAE3012/commentaires" method="post">
+<form action="localhost/SAE3012/commentaires" method="post">
     <input type="hidden" name="messageId" value="{{ messages.IdMsg }}">
     <textarea name="texte" placeholder="Écrire un commentaire..."></textarea>
     <button type="submit">Publier</button>

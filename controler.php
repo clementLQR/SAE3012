@@ -11,7 +11,7 @@
         $success = insert_utilisateur($identifiant, $mdp);
         if ($success) {
             connecte_utilisateur($identifiant, $mdp);
-            header('Location: http://localhost/SAE3012' );
+            header('Location: http://localhost/SAE3012');
             return afficher_page_accueil();
         } else {
             $option = "Erreur d'inscription";
@@ -154,6 +154,8 @@
         // print_r( "dislike_message called with messageId: $messageId, userId: $userId\n");
         insert_reaction_dislike($messageId, $userId);
     }
+
+
 
 
 // insert_message('test', 1, 1, 'test de texte');
