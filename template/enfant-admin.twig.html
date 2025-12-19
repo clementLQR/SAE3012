@@ -1,0 +1,218 @@
+{% extends 'parent-footer.twig.html' %}
+{% block title %}Page Admin{% endblock %}
+
+{% block style %}
+<style>
+
+    h1 {
+        font-size: 45px;
+        margin-bottom: 3%;
+    }
+
+    section{
+        background-color: rgb(110, 203, 243);
+        color: #212529;
+        padding: 7px;
+        border-radius: 10px;
+        margin-bottom: 5%;
+    }
+
+    button {
+    font-size: 18px;
+    height: 60px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: rgba(250, 63, 21, 0.781);
+    border: none;
+
+    }
+    button:hover {
+        transform: scale(1.05);
+        background-color: rgba(179, 49, 22, 0.85);
+    }
+
+    .utilisateur {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10%;
+    }
+
+    table {
+        border-collapse: collapse;
+        border: 2px solid grey;
+        width: 80%;
+    }
+    th {
+        background-color: rgb(110, 203, 243);
+        color: #212529;
+    }
+
+    th, td {
+        border: 1px solid grey;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .categorie{
+        margin-top: 10%;
+    }
+
+    .msg-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20%;
+    }
+
+    .msg {
+        margin: 0 auto 10px auto;
+        width: 100%;
+        background-color: rgba(236, 243, 243, 0.793);
+        border-radius: 10px;
+        color: #212529;
+        text-align: center;
+    }
+
+    .haut {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4%;
+        background-color: rgb(110, 203, 243);
+        padding: 5px 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .haut p {
+        font-size: 11px;
+    }
+
+    .haut h2 {
+        font-size: 17px
+    }
+
+    .msg img {
+        display: block;
+        max-width: 100%;
+        margin: 10px auto 15px auto;
+    }
+
+    .texte {
+        text-align: left;
+        padding: 0 10px 10px 10px;
+        margin: 0;
+        font-size: 16px;
+    }
+
+
+    .commentaire {
+        border : solid grey 2px;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .commentaires-section{
+        background-color: rgba(236, 243, 243, 0.793);
+        padding: 5px 10px;
+        color: #212529;
+        border-radius: 10px;
+        margin: 0 0 30px 0;
+    }
+
+
+</style>
+{% endblock %}
+
+{% block contenu %}
+    <h1>Page Admin</h1>
+
+    <section>
+        <h2>Utilisateurs</h2>
+    </section>
+    
+    <div class="utilisateur">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nom d'utilisateur</th>
+                <th>Biographie</th>
+                <th>Actions</th>
+            </tr>
+            {% for utilisateur in utilisateurs %}
+            {% if utilisateur.identifiant != 'admin' %}
+            <tr>
+                <td>{{ utilisateur.IdUser }}</td>
+                <td>{{ utilisateur.identifiant }}</td>
+                <td>{{ utilisateur.biographie }}</td>
+                <td>
+                    <form action="/SAE3012/admin" method="post">
+                        <input type="hidden" name="supprimerUserId" value="{{ utilisateur.IdUser }}">
+                        <button type="submit">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+
+{% for bloc in categories %}
+
+    <section class="categorie">
+    <h2>Catégorie: {{ bloc.categorie.nom }}</h2>
+    </section>
+
+    {% for message in bloc.messages %}
+        <h2>Messages</h2>
+
+        <div class="msg-container">
+            <div class="msg">
+                <div class="haut">
+                    <h2>@{{ message.auteur }}</h2>
+                    <p>{{ message.date }}</p>
+                </div>
+
+                {% if message.imageSrc %}
+                    <img src="{{ message.imageSrc }}" alt="Message Image de {{ message.auteur }}">
+                {% endif %}
+
+                <p class="texte">{{ message.texte }}</p>
+            </div>
+            <form action="/SAE3012/admin" method="post">
+                <input type="hidden" name="supprimerMessageId" value="{{ message.IdMsg }}">
+                <p>{{ message.IdMsg }}</p>
+                <button type="submit">Supprimer le message</button>
+            </form>      
+        </div>
+        <div class="commentaires-section">
+            <h2>Commentaires du message</h2>
+            {% for commentaire in commentaires %}
+                {% if commentaire.IdMsg == message.IdMsg %}
+                    <div class="commentaire">
+                        <p><strong>@{{ commentaire.auteur }}:</strong> {{ commentaire.texte }}</p>
+                        <form action="/SAE3012/admin" method="post">
+                            <input type="hidden" name="supprimerCommentaireId" value="{{ commentaire.IdComment }}">
+                            <button type="submit">Supprimer</button>
+                        </form>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    {% endfor %}
+
+{% endfor %}
+
+
+{% endblock %}
+

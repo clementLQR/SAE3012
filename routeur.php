@@ -14,6 +14,7 @@
     $action  = $pathExplode[2] ?? null; 
 
     /* debug */
+
     // echo '<br>';
     // print_r($pathExplode);
     // echo '<br>';
@@ -47,6 +48,25 @@
 
         afficher_page_connexion_inscription();
         
+    }
+
+    /* si l'utilisateur est sur la page admin et qu'il est admin */
+    else if ($section == 'admin' && $_SESSION['utilisateur']['identifiant'] == 'admin'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if (isset($_POST['supprimerUserId'])){
+                $userId = $_POST['supprimerUserId'];
+                supprimer_utilisateur($userId);
+            }
+            else if (isset($_POST['supprimerMessageId'])){
+                $messageId = $_POST['supprimerMessageId'];
+                supprimer_message($messageId);
+            }
+            else if (isset($_POST['supprimerCommentaireId'])){
+                $commentaireId = $_POST['supprimerCommentaireId'];
+                supprimer_commentaire($commentaireId);
+            }
+        }
+        afficher_page_admin();
     }
 
     /* si l'utilisateur est sur la page des commentaires */

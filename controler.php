@@ -155,6 +155,35 @@
         insert_reaction_dislike($messageId, $userId);
     }
 
+    function afficher_page_admin() {
+        global $twig;
+
+        $categories = [];
+
+        for ($i = 1; $i <= 8; $i++) {
+            $categories[] = [
+                'categorie' => get_categorie($i),
+                'messages'  => get_messages_par_categorie($i),
+            ];
+        }
+
+        echo $twig->render('enfant-admin.twig.html', [
+            'categories'   => $categories,
+            'utilisateurs' => get_all_utilisateur(),
+            'commentaires' => get_all_commentaire(),
+        ]);
+    }
+
+    function supprimer_utilisateur($userId){
+        print_r("supprimer_utilisateur called with userId: $userId\n");
+        delete_utilisateur($userId);
+    }
+
+    function supprimer_commentaire($commentaireId){
+        print_r("supprimer_commentaire called with commentaireId: $commentaireId\n");
+        delete_commentaire($commentaireId);
+    }
+
 
 
 

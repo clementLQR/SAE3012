@@ -223,6 +223,49 @@
         }
     }
 
+    function delete_utilisateur($idUser){
+        global $mysqli;
+        $queryMessages = "SELECT idMsg FROM message WHERE IdUser = $idUser";
+        $resultMessages = mysqli_query($mysqli, $queryMessages);
+        while ($message = mysqli_fetch_assoc($resultMessages)) {
+            delete_message($message['idMsg']);
+        }
+        $queryCommentaires = "DELETE FROM commentaire WHERE IdUser = $idUser";
+        mysqli_query($mysqli, $queryCommentaires);
+        $queryReactions = "DELETE FROM reaction WHERE IdUser = $idUser";
+        mysqli_query($mysqli, $queryReactions);
+        $query = "DELETE FROM utilisateur WHERE IdUser = $idUser";
+        $result = mysqli_query($mysqli, $query);
+
+        if ($result) {
+            return true; // succès
+        } else {
+            return false; // échec
+        }
+    }
+
+    function delete_commentaire($idCom){
+        global $mysqli;
+        // Récupère l'IdMsg du commentaire pour mettre à jour le nombre de commentaires
+        $queryGetMsg = "SELECT IdMsg FROM commentaire WHERE IdComment = $idCom";
+        $resultGetMsg = mysqli_query($mysqli, $queryGetMsg);
+        $commentaire = mysqli_fetch_assoc($resultGetMsg);
+        $idMsg = $commentaire['IdMsg'];
+
+        $query = "DELETE FROM commentaire WHERE IdComment = $idCom";
+        $result = mysqli_query($mysqli, $query);
+
+        if ($result) {
+            // Met à jour le nombre de commentaires dans la table message
+            $updateQuery = "UPDATE message SET nbrCom = nbrCom - 1 WHERE idMsg = $idMsg";
+            mysqli_query($mysqli, $updateQuery);
+
+            return true; // succès
+        } else {
+            return false; // échec
+        }
+    }
+
 
     /* paramètre */
 
@@ -283,6 +326,17 @@
         FROM commentaire INNER JOIN utilisateur 
         ON commentaire.IdUser = utilisateur.IdUser WHERE IdMsg = $messageId
         ORDER BY dateCom ASC";
+        $result = mysqli_query($mysqli, $query);
+        $commentaire = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $commentaire;
+    }
+
+    function get_all_commentaire(){
+        global $mysqli;
+        $query = "SELECT *,utilisateur.identifiant AS auteur 
+        FROM commentaire INNER JOIN utilisateur 
+        ON commentaire.IdUser = utilisateur.IdUser 
+        ORDER BY dateCom DESC";
         $result = mysqli_query($mysqli, $query);
         $commentaire = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $commentaire;
